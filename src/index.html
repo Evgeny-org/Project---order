@@ -5,18 +5,103 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
 	<link href="./output.css" rel="stylesheet">
+	<!-- Слайдер -->
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/css/swiper.min.css" rel="stylesheet" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/js/swiper.min.js"></script>
+	<link rel="stylesheet" href="./CSS/slider.css">
+	<!-- ------- -->
 </head>
-<body class="h-full">
-	<div class="min-h-full  flex flex-col">
-<header class="w-screen h-[75px] bg-[#D9D9D9]">
-	
+<body class="h-full font-['Times_New_Roman_Regular'] overflow-hidden">
+	<div class="min-h-full flex flex-col">
+<header class="w-screen h-[75px] bg-[#D9D9D9] mb-[100px]">
+	<div class="max-w-[80%] mx-auto">
+		<div class="flex justify-end text-2xl py-[20px]">
+			<a href="#">Регистрация</a>
+			<p class="text-[#007bff] mx-2">/</p>
+			<a href="#">Авторизация</a>
+		</div>
+	</div>
 </header>
 		<main class="flex-auto">
-			
+			<div class="max-w-[80%] mx-auto">
+				<p class="text-2xl text-center leading-normal tracking-widest mb-[100px]">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae auctor risus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nunc et quam aliquet lacus feugiat vehicula sit amet eu neque. Aenean ac dui pellentesque, dignissim ante sed, condimentum ipsum. Quisque sagittis lorem lacus, sit amet tempus sapien semper nec. Integer sagittis euismod</p>
+				<!-- Слайдер -->
+				<div class="container mb-[100px]">
+				  <div class="row">
+				    <div class="swiper-container" id="js-carousel">
+				      <div class="swiper-wrapper">
+				        <div class="swiper-slide" style="text-align: center">
+				          <img src="img/664bca768342b505821a725715aea6eba4020f48_original.jpeg" alt="">
+				        </div>
+				        <div class="swiper-slide" style="text-align: center">
+				          <img src="img/653552.932x1242.jpg" alt="">
+				        </div>
+				        <div class="swiper-slide" style="text-align: center">
+				          <img src="img/6701c401eac7e4c6915f0670139304ca56ee9d33_original.jpeg" alt="">
+				        </div>
+				        <div class="swiper-slide" style="text-align: center">
+				          <img src="img/681e52cd1218a5c2544c197b4b820e1c11d52025_original.jpeg" alt="">
+				        </div>
+				        <div class="swiper-slide" style="text-align: center">
+				          <img src="img/81173380299.jpg" alt="">
+				        </div>
+				        <div class="swiper-slide" style="text-align: center">
+				          <img src="img/rBVa3mIE7o6AUiScAAEwmJ9KFXQ966.jpg" alt="">
+				        </div>
+				        <div class="swiper-slide" style="text-align: center">
+				          <img src="img/c646e780a221f0f944b94fecfac879c3a80c9535_original.jpeg" alt="">
+				        </div>
+				        <div class="swiper-slide" style="text-align: center">
+				          <img src="img/images.jpeg" alt="">
+				        </div>
+				        <div class="swiper-slide" style="text-align: center">
+				          <img src="img/14bf49c5b55b16c5ded910982505e67f340c33d3_original.jpeg" alt="">
+				        </div>
+				        <div class="swiper-slide" style="text-align: center">
+				          <img src="img/himchistka-shapki-muzhskoj-tekstil.jpg" alt="">
+				        </div>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+				<!-- ------- -->
+
+				<div class="flex justify-center">
+					<a href="#" class="block w-[400px] h-[75.1px] h-full normal-case relative mx-6">
+						<div class="w-full h-full bg-black hover:translate-x-[-15px] hover:translate-y-[-15px] duration-300">
+							<p class="font-['Times_New_Roman_Bold'] font-bold text-3xl text-white tracking-widest whitespace-nowrap absolute top-2/4 left-2/4 translate-x-[-50%] translate-y-[-50%] mb-0">Сделать заказ</p>
+						</div>
+						<div class="w-full h-full bg-[#D9D9D9] absolute top-0 left-0 z-[-10]"></div>
+					</a>
+
+					<a href="#" class="block w-[400px] h-[75.1px] h-full normal-case relative mx-6">
+						<div class="w-full h-full bg-black hover:translate-x-[-15px] hover:translate-y-[-15px] duration-300">
+							<p class="font-['Times_New_Roman_Bold'] font-bold text-3xl text-white tracking-widest whitespace-nowrap absolute top-2/4 left-2/4 translate-x-[-50%] translate-y-[-50%] mb-0">Мои заказы</p>
+						</div>
+						<div class="w-full h-full bg-[#D9D9D9] absolute top-0 left-0 z-[-10]"></div>
+					</a>
+				</div>
+
+			</div>
 		</main>
 
 <footer class="w-screen h-[75px] bg-[#D9D9D9]">
-	
+	<div class="max-w-[80%] mx-auto">
+		<div class="flex justify-end py-1.5">
+			<a href="#">
+				<img src="img/tMe.png" alt="tMe" class="w-16 ml-8 grayscale-[50%] hover:grayscale-0">
+			</a>
+			<a href="#">
+				<img src="img/vK.png" alt="vK" class="w-16 ml-8 grayscale-[50%] hover:grayscale-0">
+			</a>
+			<a href="#">
+				<img src="img/Inst.png" alt="Inst" class="w-16 ml-8 grayscale-[50%] hover:grayscale-0">
+			</a>
+		</div>
+	</div>
 </footer>	</div>
+
+	<script src="./JS/slider.js"></script>
 </body>
 </html>
