@@ -1,9 +1,9 @@
 .container{
-  max-width: 1920px;
+  max-width: 100%;
 }
 
 img{
-  width: 100%;
+  width: 90%;
 }
 
 .swiper-slide{
