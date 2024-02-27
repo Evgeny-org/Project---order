@@ -27,7 +27,7 @@
 <body class="h-full font-TNRR">
 	<div class="min-h-full flex flex-col">
 
-		<header class="w-screen h-[75px] bg-[#D9D9D9] mb-[100px]">
+		<header class="w-screen h-[75px] bg-[#D9D9D9] mb-[100px] px-10">
 			<div class="max-w-[1600px] h-full mx-auto">
 				<div class="h-full flex items-center justify-end">
 					<div class="flex justify-end items-center text-2xl">
@@ -51,32 +51,32 @@
 
 										<div class="flex items-center mb-3">
 											<p class="text-2xl m-0">Логин*</p>
-											<input class="w-full outline-none border-b-[1px] border-black px-2 pt-1" type="text" name="login">
+											<input class="w-full outline-none border-b-[1px] border-black px-2 pt-2 text-right" type="text" name="login">
 										</div>
 
 										<div class="flex items-center mb-3">
 											<p class="text-2xl m-0">Пароль*</p>
-											<input class="w-full outline-none border-b-[1px] border-black px-2 pt-1" type="password" name="password">
+											<input class="w-full outline-none border-b-[1px] border-black px-2 pt-2 text-right" type="password" name="password">
 										</div>
 
 										<div class="flex items-center mb-3">
 											<p class="text-2xl m-0">Telegram*</p>
-											<input class="w-full outline-none border-b-[1px] border-black px-2 pt-1" type="text" name="telegram">
+											<input class="w-full outline-none border-b-[1px] border-black px-2 pt-2 text-right" type="text" name="telegram">
 										</div>
 
 										<div class="flex items-center mb-3">
 											<p class="text-2xl m-0">ФИО</p>
-											<input class="w-full outline-none border-b-[1px] border-black px-2 pt-1" type="text" name="full_name">
+											<input class="w-full outline-none border-b-[1px] border-black px-2 pt-2 text-right" type="text" name="full_name">
 										</div>
 
 										<div class="flex items-center mb-3">
 											<p class="text-2xl m-0">Телефон</p>
-											<input class="w-full outline-none border-b-[1px] border-black px-2 pt-1" type="text" name="telephone"s>
+											<input class="w-full outline-none border-b-[1px] border-black px-2 pt-2 text-right" type="text" name="telephone"s>
 										</div>
 
 										<div class="flex items-center mb-[40px]">
 											<p class="text-2xl m-0">vK</p>
-											<input class="w-full outline-none border-b-[1px] border-black px-2 pt-1" type="text" name="vk">
+											<input class="w-full outline-none border-b-[1px] border-black px-2 pt-2 text-right" type="text" name="vk">
 										</div>
 										<div class="relative w-full">
 											<button type="submit" class="block relative z-10 w-8/12 mx-auto font-TNRB text-2xl text-white tracking-[.20em] py-3 bg-black hover:translate-x-[-15px] hover:translate-y-[-15px] duration-300 focus:outline-0">Зарегистрироваться</button>
@@ -111,16 +111,32 @@
 										<h2 class="text-center ">Авторизация</h2>
 										<div class="flex items-center mb-3">
 											<p class="text-2xl m-0">Логин</p>
-											<input class="w-full outline-none border-b-[1px] border-black px-2 pt-1" type="text" name="login">
+											<input class="w-full outline-none border-b-[1px] border-black px-2 pt-2 text-right" type="text" name="login">
 										</div>
 										<div class="flex items-center mb-[40px]">
 											<p class="text-2xl m-0">Пароль</p>
-											<input class="w-full outline-none border-b-[1px] border-black px-2" type="password" name="password">
+											<input class="w-full outline-none border-b-[1px] border-black px-2 pt-2 text-right" type="password" name="password">
 										</div>
 										<div class="relative w-full">
 											<button type="submit" class="block relative z-10 w-8/12 mx-auto font-TNRB text-2xl text-white tracking-[.20em] py-3 bg-black hover:translate-x-[-15px] hover:translate-y-[-15px] duration-300 focus:outline-0">Войти</button>
 											<div class="w-8/12 h-full bg-[#D9D9D9] absolute top-0 left-2/4 translate-x-[-50%] z-0"></div>
 										</div>
+										<?php
+											if ($_SESSION['messageAuth']) {
+												echo 
+													'<p class="text-center text-red-600 mt-3"">
+														' . $_SESSION['messageAuth'] . '
+													</p>';
+												unset($_SESSION['messageAuth']);
+											} elseif ($_SESSION['messageReg']){
+												echo 
+													'<p class="text-center text-green-600 mt-3"">
+														' . $_SESSION['messageReg'] . '
+													</p>';
+												unset($_SESSION['messageReg']);
+											}
+											
+										?>
 									</form>
 								</div>
 								<!-- ------- -->
@@ -193,7 +209,7 @@
 			</div>
 		</main>
 
-<footer class="w-screen h-[75px] bg-[#D9D9D9]">
+<footer class="w-screen h-[75px] bg-[#D9D9D9] px-10">
 	<div class="max-w-[1600px] h-full mx-auto">
 		<div class="h-full flex items-center justify-end">
 		<div class="flex justify-end py-1">
@@ -214,6 +230,7 @@
 
 	<script>
 		function showDialogAuth(){
+			// window.location.href = 'index.php#myModal';
 			let dialog = document.getElementById('dialogAuth');
 			dialog.classList.remove('hidden');
 			dialog.classList.add('flex');

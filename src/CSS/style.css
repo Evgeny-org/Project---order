@@ -8,3 +8,40 @@
   src: url("../fonts/TimesNewRomanPS-BoldMT.ttf") format("ttf"), url("../fonts/TimesNewRomanPS-BoldMT.woff") format("woff");
   font-weight: 600;
 }
+.avatarIn {
+  opacity: 0.5;
+  -webkit-transition: 0.75s;
+  transition: 0.75s;
+}
+
+.avatarOut {
+  cursor: pointer;
+}
+
+.avatarOut:hover .avatarIn {
+  opacity: 1;
+}
+
+svg {
+  width: 100%;
+  height: 100%;
+}
+
+.shape {
+  stroke-dasharray: 140 540;
+  stroke-dashoffset: -474;
+  stroke-width: 0px;
+  fill: transparent;
+  stroke: #000;
+  border-bottom: 0.75px solid black;
+  -webkit-transition: stroke-width 0.75s, stroke-dashoffset 0.75s, stroke-dasharray 0.75s;
+  transition: stroke-width 0.75s, stroke-dashoffset 0.75s, stroke-dasharray 0.75s;
+  width: 100%;
+  height: 100%;
+}
+
+.avatarOut:hover .shape {
+  stroke-width: 6px;
+  stroke-dashoffset: 0;
+  stroke-dasharray: 300;
+}

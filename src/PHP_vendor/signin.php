@@ -19,7 +19,10 @@
 			"vk" => $user['vk']
 		];
 
-		// print_r($user);
-
 		header('Location: ../profile.php');
+	} else {
+		// тут должен быть код, который перенаправляет в header.php и октрывает модальное окно
+		// header("Location: ../index.php#myModal");
+		$_SESSION['messageAuth'] = 'Ошибка авторизации, неправильный логин или пароль.';
+		header("Location: ../index.php");
 	}

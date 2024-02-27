@@ -1,4 +1,4 @@
-		<header class="w-screen h-[75px] bg-[#D9D9D9] mb-[100px]">
+		<header class="w-screen h-[75px] bg-[#D9D9D9] mb-[100px] px-10">
 			<div class="max-w-[1600px] h-full mx-auto">
 				<div class="h-full flex items-center justify-end">
 					<div class="flex justify-end items-center text-2xl">

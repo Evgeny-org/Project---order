@@ -1,1 +1,33 @@
 @import "fonts.sass"
+
+.avatarIn
+	opacity: .5
+	transition: .75s
+
+.avatarOut
+	cursor: pointer
+
+.avatarOut:hover .avatarIn
+	opacity: 1
+
+svg
+	width: 100%
+	height: 100%
+
+.shape
+	stroke-dasharray: 140 540
+	stroke-dashoffset: -474
+	stroke-width: 0px
+	fill: transparent
+	stroke: #000
+	border-bottom: .75px solid black
+	transition: stroke-width .75s, stroke-dashoffset .75s, stroke-dasharray .75s
+	width: 100%
+	height: 100%
+
+.avatarOut:hover .shape 
+	stroke-width: 6px
+	stroke-dashoffset: 0
+	stroke-dasharray: 300
+
+

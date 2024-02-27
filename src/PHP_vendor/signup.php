@@ -9,5 +9,6 @@
 	$telephone = $_POST['telephone'];
 	$vk = $_POST['vk'];
 
-	mysqli_query($connect, "INSERT INTO `users` (`id`, `login`, `password`, `telegram`, `full_name`, `telephone`, `vk`) VALUES (NULL, '$login', '$password', '$telegram', '$full_name', '$telephone', '$vk')");
-	header('Location: ../index.php');
+	mysqli_query($connect, "INSERT INTO `users` (`id`, `login`, `password`, `telegram`, `full_name`, `telephone`, `vk`, `avatar`) VALUES (NULL, '$login', '$password', '$telegram', '$full_name', '$telephone', '$vk', NULL)");
+	$_SESSION['messageReg'] = "$login успешно зарегистрирован(а), пожалуйста, авторизируйтесь! :)";
+	header("Location: ../index.php");
