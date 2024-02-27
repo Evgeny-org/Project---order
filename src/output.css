@@ -598,6 +598,10 @@ video {
   left: 0px;
 }
 
+.left-1\/2 {
+  left: 50%;
+}
+
 .left-2\/4 {
   left: 50%;
 }
@@ -610,20 +614,16 @@ video {
   top: 0px;
 }
 
+.top-1\/2 {
+  top: 50%;
+}
+
 .top-2\/4 {
   top: 50%;
 }
 
 .top-\[-100px\] {
   top: -100px;
-}
-
-.left-1\/2 {
-  left: 50%;
-}
-
-.top-1\/2 {
-  top: 50%;
 }
 
 .z-0 {
@@ -741,6 +741,34 @@ video {
   height: 100vh;
 }
 
+.h-\[100\%\] {
+  height: 100%;
+}
+
+.h-\[100px\] {
+  height: 100px;
+}
+
+.h-2 {
+  height: 0.5rem;
+}
+
+.h-2\.5 {
+  height: 0.625rem;
+}
+
+.h-dvh {
+  height: 100dvh;
+}
+
+.h-\[200\%\] {
+  height: 200%;
+}
+
+.h-auto {
+  height: auto;
+}
+
 .min-h-full {
   min-height: 100%;
 }
@@ -783,6 +811,34 @@ video {
 
 .w-screen {
   width: 100vw;
+}
+
+.w-\[1000px\] {
+  width: 1000px;
+}
+
+.w-dvw {
+  width: 100dvw;
+}
+
+.w-\[200\%\] {
+  width: 200%;
+}
+
+.w-\[150px\] {
+  width: 150px;
+}
+
+.w-\[1500px\] {
+  width: 1500px;
+}
+
+.w-\[100\%\] {
+  width: 100%;
+}
+
+.w-\[150\%\] {
+  width: 150%;
 }
 
 .max-w-\[1600px\] {
@@ -879,6 +935,11 @@ video {
 
 .bg-opacity-50 {
   --tw-bg-opacity: 0.5;
+}
+
+.object-cover {
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .p-0 {
@@ -996,6 +1057,14 @@ video {
 
 .opacity-100 {
   opacity: 1;
+}
+
+.opacity-25 {
+  opacity: 0.25;
+}
+
+.opacity-50 {
+  opacity: 0.5;
 }
 
 .shadow-\[0_0_10px_rgba\(255\2c 0\2c 0\2c 1\)\] {

@@ -16,7 +16,8 @@
 			"full_name" => $user['full_name'],
 			"telephone" => $user['telephone'],
 			"telegram" => $user['telegram'],
-			"vk" => $user['vk']
+			"vk" => $user['vk'],
+			"avatar" => $user['avatar']
 		];
 
 		header('Location: ../profile.php');

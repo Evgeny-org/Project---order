@@ -45,3 +45,9 @@ svg {
   stroke-dashoffset: 0;
   stroke-dasharray: 300;
 }
+
+#previewPhoto {
+  border: 1px solid;
+  width: 150px;
+  height: 100px;
+}

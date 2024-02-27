@@ -28,7 +28,11 @@
 					<div class="w-[80%] mx-auto flex">
 
 						<div class="flex flex-col justify-between mr-[50px]">
-							<div class="w-[400px] h-[500px] bg-[#D9D9D9] mb-[25px]"></div>
+
+							<div class="w-[400px] h-[500px] bg-[#D9D9D9] mb-[25px] relative">
+								<img class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?= $_SESSION['user']['avatar'] ?>" alt="">
+							</div>
+
 							<a href="./profile_change.php" class="block w-[400px] h-[55px] normal-case relative">
 								<div class="w-full h-full bg-black hover:translate-x-[-15px] hover:translate-y-[-15px] duration-300">
 									<p class="font-TNRB text-xl text-white tracking-[.20em] whitespace-nowrap absolute top-2/4 left-2/4 translate-x-[-50%] translate-y-[-50%] mb-0">Изменить профиль</p>

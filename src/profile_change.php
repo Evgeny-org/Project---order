@@ -33,26 +33,40 @@
 
 		<main class="flex-auto px-10 tracking-widest">
 				<div class="max-w-[1920px] mx-auto">
-					<div class="w-[80%] mx-auto flex">
+					<form class="w-[80%] mx-auto flex" action="./PHP_vendor/change_profile.php" method="post" enctype="multipart/form-data">
 
 						<div class="flex flex-col justify-between mr-[50px]">
 
-							<form class="w-[400px] h-[500px] bg-[#D9D9D9] mb-[25px] relative" action="./PHP_vendor/change_profile.php" method="post" enctype="multipart/form-data">
+							<div class="w-[400px] h-[500px] bg-[#D9D9D9] mb-[25px] relative">
 								<label class="w-full h-full absolute top-0 left-0 avatarOut" for="avatar">
+
+									<div class="w-full h-full absolute top-0 left-0">
+										<img class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] opacity-25" src="<?= $_SESSION['user']['avatar'] ?>" alt="">
+									</div>
+
 									<svg xmlns="http://www.w3.org/2000/svg" class="">
 										<rect class="shape"/>
-									<img class="absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] avatarIn" src="./img/free-icon-plus-3398952.png" alt="Фото профиля ">
+									<img class="absolute z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] avatarIn" src="./img/free-icon-plus-3398952.png" alt="Фото профиля">
+
 								</label>
-								<input id="avatar" type="file" accept="image/*" name="avatar"> <!-- class="invisible" -->
 
-								<button type="submit" class="block w-[400px] h-[75px] normal-case relative">
-									<div class="w-full h-full bg-black hover:translate-x-[-15px] hover:translate-y-[-15px] duration-300">
-										<p class="font-TNRB text-3xl text-white tracking-[.20em] whitespace-nowrap absolute top-2/4 left-2/4 translate-x-[-50%] translate-y-[-50%] mb-0">Сохранить</p>
-									</div>
-									<div class="w-full h-full bg-[#D9D9D9] absolute top-0 left-0 z-[-10]"></div>
-								</button>
+								<input id="avatar" class="invisible" type="file" accept="image/*" name="avatar"> 
 
-							</form>
+								<script type="text/javascript">
+									window.addEventListener('load', function() {
+									  document.querySelector('input[type="file"]').addEventListener('change', function() {
+									      if (this.files && this.files[0]) {
+									          var img = document.querySelector('img');
+									          img.onload = () => {
+									              URL.revokeObjectURL(img.src);  // no longer needed, free memory
+									          }
+
+									          img.src = URL.createObjectURL(this.files[0]); // set src to blob url
+									      }
+									  });
+									});
+								</script>
+							</div>
 
 							<a href="./profile.php" class="block w-[400px] h-[55px] normal-case relative">
 								<div class="w-full h-full bg-black hover:translate-x-[-15px] hover:translate-y-[-15px] duration-300">
@@ -62,7 +76,7 @@
 							</a>
 						</div>
 
-						<form class="w-[50%] flex flex-col justify-between" action="./PHP_vendor/change_profile.php" method="post">
+						<div class="w-[50%] flex flex-col justify-between">
 							<div class="">
 								<h1 class="font-TNRB text-5xl mb-[100px]">Что Вы хотите изменить?</h1>
 
@@ -93,8 +107,8 @@
 								</div>
 								<div class="w-full h-full bg-[#D9D9D9] absolute top-0 left-0 z-[-10]"></div>
 							</button>
-						</form>
-					</div>
+						</div>
+					</form>
 				</div>
 		</main>
 
@@ -116,5 +130,7 @@
 	</div>
 </footer>
 	</div>
+
+	
 </body>
 </html>
