@@ -56,7 +56,7 @@
 								<p class="text-3xl mb-[50px]">Telegram: <?= $_SESSION['user']['telegram'] ?></p>
 								<p class="text-3xl mb-[50px]">vK: <?= $_SESSION['user']['vk'] ?></p>
 							</div>
-							<a href="#" class="block w-[400px] h-[75px] normal-case relative">
+							<a href="./my_orders.php" class="block w-[400px] h-[75px] normal-case relative">
 								<div class="w-full h-full bg-black hover:translate-x-[-15px] hover:translate-y-[-15px] duration-300">
 									<p class="font-TNRB text-3xl text-white tracking-[.20em] whitespace-nowrap absolute top-2/4 left-2/4 translate-x-[-50%] translate-y-[-50%] mb-0">Мои заказы</p>
 								</div>

@@ -101,7 +101,7 @@
 								</div>
 							</div>
 
-							<button type="submit" class="block w-[400px] h-[75px] normal-case relative">
+							<button type="submit" class="block w-[400px] h-[55px] normal-case relative">
 								<div class="w-full h-full bg-black hover:translate-x-[-15px] hover:translate-y-[-15px] duration-300">
 									<p class="font-TNRB text-3xl text-white tracking-[.20em] whitespace-nowrap absolute top-2/4 left-2/4 translate-x-[-50%] translate-y-[-50%] mb-0">Сохранить</p>
 								</div>
