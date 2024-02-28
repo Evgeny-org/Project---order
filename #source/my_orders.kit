@@ -1,7 +1,7 @@
 <?php
-	ini_set('display_errors', 0);
-	ini_set('display_startup_errors', 0);
-	error_reporting(E_ALL);
+	// ini_set('display_errors', 0);
+	// ini_set('display_startup_errors', 0);
+	// error_reporting(E_ALL);
 
 	session_start();
 	if(!$_SESSION['user']){
@@ -28,14 +28,31 @@
 					<div class="w-[80%] mx-auto flex flex-col">
 
 						<h1 class="font-TNRB text-5xl mb-[50px]">Мои заказы</h1>
+						<hr class="border-black">
+						<?php
+							$connect = mysqli_connect('localhost', 'root', '', 'Dmitry');
 
-						<div class="flex">
-							<p><?= $_SESSION['order']['user'] ?></p>
-							<div>
-								<img src="" alt="">
-							</div>
-							<p><?= $_SESSION['order']['state'] ?></p>
-						</div>
+							$result = mysqli_query($connect, "SELECT * FROM `orders`");
+
+							while ($row = mysqli_fetch_assoc($result)) {
+								if ($row['user'] == $_SESSION['user']['id']) {
+									// echo '<p>ID: ' . $row['id'] . '</p>';
+									// echo '<p>User: ' . $row['user'] . '</p>';
+									// echo '<p>Excel: ' . $row['excel'] . '</p>';
+									// echo '<p>State: ' . $row['state'] . '</p>';
+									// echo '<p>Photos: ' . $row['photos'] . '</p>';
+									// echo '<hr>';
+									?>
+										<div class="flex">
+											<p>Заказ №<?= $row['id'] ?></p>
+											<a href="<?= substr($row['excel'],3) ?>"><?= substr($row['excel'],3) ?></a>
+											<p><?= $row['state'] ?></p>
+										</div>
+										<hr class="border-black">
+									<?php
+								}
+							}
+						?>
 
 						<div class="flex">
 							<a href="./profile.php" class="block w-[400px] h-[55px] normal-case relative mr-10">
