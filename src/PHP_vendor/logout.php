@@ -1,5 +1,10 @@
 <?php
 	session_start();
-	unset($_SESSION['user']);
+	if ($_SESSION['user']) {
+		unset($_SESSION['user']);
+	} elseif ($_SESSION['admin']) {
+		unset($_SESSION['admin']);
+	}
+	
 	header('Location: ../index.php');
 ?>
