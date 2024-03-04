@@ -39,19 +39,24 @@ svg
 *
 	box-sizing: border-box
 
-.__select 
+.__select
 	position: relative
-	width: 230px
+	width: 300px
 	height: 40px
-	margin: 0 auto
 
-	&[data-state="active"] 
-		.__select__title 
-			&::before 
+	&[data-state="active"]
+		.__select__title
+			border-bottom: solid 1px #000
+
+			&::before
 				transform: translate(-3px, -50%) rotate(-45deg)
 
-			&::after 
+			&::after
 				transform: translate(3px, -50%) rotate(45deg)
+
+			&::before,
+			&::after 
+				background-color: #000
 
 		.__select__content 
 			opacity: 1
@@ -151,9 +156,8 @@ svg
 	
 
 	&:hover 
-		background-color: #D8093A !important
+		// background-color: #D8093A !important
 
 		color: #ffffff
-  
 
 

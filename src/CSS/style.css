@@ -59,9 +59,11 @@ svg {
 
 .__select {
   position: relative;
-  width: 230px;
+  width: 300px;
   height: 40px;
-  margin: 0 auto;
+}
+.__select[data-state=active] .__select__title {
+  border-bottom: solid 1px #000;
 }
 .__select[data-state=active] .__select__title::before {
   -webkit-transform: translate(-3px, -50%) rotate(-45deg);
@@ -70,6 +72,9 @@ svg {
 .__select[data-state=active] .__select__title::after {
   -webkit-transform: translate(3px, -50%) rotate(45deg);
           transform: translate(3px, -50%) rotate(45deg);
+}
+.__select[data-state=active] .__select__title::before, .__select[data-state=active] .__select__title::after {
+  background-color: #000;
 }
 .__select[data-state=active] .__select__content {
   opacity: 1;
@@ -171,6 +176,5 @@ svg {
   border-top: 0 solid rgba(199, 204, 209, 0.3764705882);
 }
 .__select__label:hover {
-  background-color: #D8093A !important;
   color: #ffffff;
 }

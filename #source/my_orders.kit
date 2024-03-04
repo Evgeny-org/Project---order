@@ -99,7 +99,7 @@
 								<div class="w-full h-full bg-[#D9D9D9] absolute top-0 left-0 z-[-10]"></div>
 							</a>
 
-						<form action="./PHP_vendor/add_order.php">
+						<form action="./PHP_vendor/add_order.php" method="post">
 						    <button type="submit" id="myButton" class="block w-[400px] h-[55px] normal-case relative">
 						        <div class="w-full h-full bg-black hover:translate-x-[-15px] hover:translate-y-[-15px] duration-300">
 						            <p class="font-TNRB text-xl text-white tracking-[.20em] whitespace-nowrap absolute top-2/4 left-2/4 translate-x-[-50%] translate-y-[-50%] mb-0">Добавить</p>
@@ -141,6 +141,21 @@
 						        return 0;
 						    }
 						</script>
+						<script>
+							let cords = ['scrollX','scrollY']; 
+							// сохраняем позицию скролла в localStorage
+							window.addEventListener('unload', e => cords.forEach(cord => localStorage[cord] = window[cord])); 
+							// вешаем событие на загрузку (ресурсов) страницы
+							window.addEventListener('load', e => {
+							    // если в localStorage имеются данные
+							    if (localStorage[cords[0]]) {
+							        // скроллим к сохраненным координатам
+							        window.scroll(...cords.map(cord => localStorage[cord]));
+							        // удаляем данные с localStorage
+							        cords.forEach(cord => localStorage.removeItem(cord));
+							    }
+							});
+						</script>
 						</div>
 
 					</div>
@@ -150,5 +165,8 @@
 		<!-- @import './HTML/footer.html' -->
 
 	</div>
+
+
+
 </body>
 </html>

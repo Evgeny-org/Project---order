@@ -54,87 +54,193 @@
 									</div>
 
 									<form id="form_<?=$row['id']?>" class="" action="./PHP_vendor/state_admin.php" method="post">
-										<input type="hidden" name="state_id" value="<?=$row['id']?>">
+										<input type="hidden" name="state_id" id="state_id" value="<?=$row['id']?>">
 										<?php
 											if ($row['state'] == 'Не подтверждён') {
+												// echo
+												// 		'<p class="text-[#FF0000]">
+												// 			<select class="" id="select_'.$row['id'].'" name="select" size="1">
+												// 				<option class="text-[#FF0000] hidden" selected value="'.$row['id'].'">' . $row['state'] . '</option>
+												// 				<option class="text-[#FF5C00]" value="Подтверждён">Подтверждён</option>
+												// 				<option class="text-[#FFB800]" value="Куплен">Куплен</option>
+												// 				<option class="text-[#00FF1A]" value="Отправлен">Отправлен</option>
+												// 				<option class="text-[#8FFF00]" value="Получен">Получен</option>
+												// 			</select>
+												// 		</p>';
+												// 	} elseif ($row['state'] == 'Подтверждён'){
+												// 		echo
+												// 			'<p class="text-[#FF5C00]">
+												// 				<select id="select_'.$row['id'].'" name="select" size="1">
+												// 					<option class="text-[#FF5C00] hidden" selected value="'.$row['id'].'">' . $row['state'] . '</option>
+												// 					<option class="text-[#FF0000]" value="Не подтверждён">Не подтверждён</option>
+												// 					<option class="text-[#FFB800]" value="Куплен">Куплен</option>
+												// 					<option class="text-[#00FF1A]" value="Отправлен">Отправлен</option>
+												// 					<option class="text-[#8FFF00]" value="Получен">Получен</option>
+												// 				</select>
+												// 			</p>';
+												// 	} elseif ($row['state'] == 'Куплен'){
+												// 		echo
+												// 			'<p class="text-[#FFB800]">
+												// 				<select id="select_'.$row['id'].'" name="select" size="1">
+												// 					<option class="text-[#FFB800] hidden" selected value="'.$row['id'].'">' . $row['state'] . '</option>
+												// 					<option class="text-[#FF0000]" value="Не подтверждён">Не подтверждён</option>
+												// 					<option class="text-[#FF5C00]" value="Подтверждён">Подтверждён</option>
+												// 					<option class="text-[#00FF1A]" value="Отправлен">Отправлен</option>
+												// 					<option class="text-[#8FFF00]" value="Получен">Получен</option>
+												// 				</select>
+												// 			</p>';
+												// 	} elseif ($row['state'] == 'Отправлен'){
+												// 		echo
+												// 			'<p class="text-[#00FF1A]">
+												// 				<select id="select_'.$row['id'].'" name="select" size="1">
+												// 					<option class="text-[#00FF1A] hidden" selected value="'.$row['id'].'">' . $row['state'] . '</option>
+												// 					<option class="text-[#FF0000]" value="Не подтверждён">Не подтверждён</option>
+												// 					<option class="text-[#FF5C00]" value="Подтверждён">Подтверждён</option>
+												// 					<option class="text-[#FFB800]" value="Куплен">Куплен</option>
+												// 					<option class="text-[#8FFF00]" value="Получен">Получен</option>
+												// 				</select>
+												// 			</p>';
+												// 	} elseif ($row['state'] == 'Получен'){
+												// 		echo
+												// 			'<p class="text-[#8FFF00]">
+												// 				<select id="select_'.$row['id'].'" name="select" size="1">
+												// 					<option class="text-[#8FFF00] hidden" selected value="'.$row['id'].'">' . $row['state'] . '</option>
+												// 					<option class="text-[#FF0000]" value="Не подтверждён">Не подтверждён</option>
+												// 					<option class="text-[#FF5C00]" value="Подтверждён">Подтверждён</option>
+												// 					<option class="text-[#FFB800]" value="Куплен">Куплен</option>
+												// 					<option class="text-[#00FF1A]" value="Отправлен">Отправлен</option>
+												// 				</select>
+												// 			</p>';
+												// 	}
+
 												echo
-													'<p class="text-[#FF0000]">
-														<select class="" id="select_'.$row['id'].'" name="select" size="1">
-															<option class="text-[#FF0000] hidden" selected value="'.$row['id'].'">' . $row['state'] . '</option>
-															<option class="text-[#FF5C00]" value="Подтверждён">Подтверждён</option>
-															<option class="text-[#FFB800]" value="Куплен">Куплен</option>
-															<option class="text-[#00FF1A]" value="Отправлен">Отправлен</option>
-															<option class="text-[#8FFF00]" value="Получен">Получен</option>
-														</select>
-													</p>';
-											} elseif ($row['state'] == 'Подтверждён'){
-												echo
-													'<p class="text-[#FF5C00]">
-														<select id="select_'.$row['id'].'" name="select" size="1">
-															<option class="text-[#FF5C00] hidden" selected value="'.$row['id'].'">' . $row['state'] . '</option>
-															<option class="text-[#FF0000]" value="Не подтверждён">Не подтверждён</option>
-															<option class="text-[#FFB800]" value="Куплен">Куплен</option>
-															<option class="text-[#00FF1A]" value="Отправлен">Отправлен</option>
-															<option class="text-[#8FFF00]" value="Получен">Получен</option>
-														</select>
-													</p>';
-											} elseif ($row['state'] == 'Куплен'){
-												echo
-													'<p class="text-[#FFB800]">
-														<select id="select_'.$row['id'].'" name="select" size="1">
-															<option class="text-[#FFB800] hidden" selected value="'.$row['id'].'">' . $row['state'] . '</option>
-															<option class="text-[#FF0000]" value="Не подтверждён">Не подтверждён</option>
-															<option class="text-[#FF5C00]" value="Подтверждён">Подтверждён</option>
-															<option class="text-[#00FF1A]" value="Отправлен">Отправлен</option>
-															<option class="text-[#8FFF00]" value="Получен">Получен</option>
-														</select>
-													</p>';
-											} elseif ($row['state'] == 'Отправлен'){
-												echo
-													'<p class="text-[#00FF1A]">
-														<select id="select_'.$row['id'].'" name="select" size="1">
-															<option class="text-[#00FF1A] hidden" selected value="'.$row['id'].'">' . $row['state'] . '</option>
-															<option class="text-[#FF0000]" value="Не подтверждён">Не подтверждён</option>
-															<option class="text-[#FF5C00]" value="Подтверждён">Подтверждён</option>
-															<option class="text-[#FFB800]" value="Куплен">Куплен</option>
-															<option class="text-[#8FFF00]" value="Получен">Получен</option>
-														</select>
-													</p>';
-											} elseif ($row['state'] == 'Получен'){
-												echo
-													'<p class="text-[#8FFF00]">
-														<select id="select_'.$row['id'].'" name="select" size="1">
-															<option class="text-[#8FFF00] hidden" selected value="'.$row['id'].'">' . $row['state'] . '</option>
-															<option class="text-[#FF0000]" value="Не подтверждён">Не подтверждён</option>
-															<option class="text-[#FF5C00]" value="Подтверждён">Подтверждён</option>
-															<option class="text-[#FFB800]" value="Куплен">Куплен</option>
-															<option class="text-[#00FF1A]" value="Отправлен">Отправлен</option>
-														</select>
-													</p>';
-											}
+													'<input class="hidden" type="text" name="myVar" id="myVar_'.$row['id'].'" />
+													<div class="__select" data-state="">
+														<div class="__select__title text-[#FF0000]" data-default="Не подтверждён">Не подтверждён</div>
+														<div class="__select__content">
+
+															<input id="singleSelect0" class="__select__input" type="radio" name="singleSelect" checked />
+															<label for="singleSelect0" class="__select__label hover:bg-[#FF0000] text-[#FF0000]">Не подтверждён</label>
+
+															<input id="singleSelect1" class="__select__input" type="radio" name="singleSelect" />
+															<label for="singleSelect1" class="__select__label hover:bg-[#FF5C00] text-[#FF5C00]">Подтверждён</label>
+
+															<input id="singleSelect2" class="__select__input" type="radio" name="singleSelect" />
+															<label for="singleSelect2" class="__select__label hover:bg-[#FFB800] text-[#FFB800]">Куплен</label>
+
+															<input id="singleSelect3" class="__select__input" type="radio" name="singleSelect" />
+															<label for="singleSelect3" class="__select__label hover:bg-[#00FF1A] text-[#00FF1A]">Отправлен</label>
+
+															<input id="singleSelect4" class="__select__input" type="radio" name="singleSelect" />
+															<label for="singleSelect4" class="__select__label hover:bg-[#8FFF00] text-[#8FFF00]">Получен</label>
+
+														</div>
+													</div>';
+													} elseif ($row['state'] == 'Подтверждён'){
+														echo
+															'<input class="hidden" type="text" name="myVar" id="myVar_'.$row['id'].'" />
+															<div class="__select" data-state="">
+															<div class="__select__title text-[#FF5C00]" data-default="Не подтверждён">Подтверждён</div>
+															<div class="__select__content">
+
+																<input id="singleSelect0" class="__select__input" type="radio" name="singleSelect" checked />
+																<label for="singleSelect0" class="__select__label hover:bg-[#FF5C00] text-[#FF5C00]">Подтверждён</label>
+
+																<input id="singleSelect1" class="__select__input" type="radio" name="singleSelect" />
+																<label for="singleSelect1" class="__select__label hover:bg-[#FF0000] text-[#FF0000]">Не подтверждён</label>
+
+																<input id="singleSelect2" class="__select__input" type="radio" name="singleSelect" />
+																<label for="singleSelect2" class="__select__label hover:bg-[#FFB800] text-[#FFB800]">Куплен</label>
+
+																<input id="singleSelect3" class="__select__input" type="radio" name="singleSelect" />
+																<label for="singleSelect3" class="__select__label hover:bg-[#00FF1A] text-[#00FF1A]">Отправлен</label>
+
+																<input id="singleSelect4" class="__select__input" type="radio" name="singleSelect" />
+																<label for="singleSelect4" class="__select__label hover:bg-[#8FFF00] text-[#8FFF00]">Получен</label>
+
+															</div>
+														</div>';
+													} elseif ($row['state'] == 'Куплен'){
+														echo
+															'<input class="hidden" type="text" name="myVar" id="myVar_'.$row['id'].'" />
+															<div class="__select" data-state="">
+															<div class="__select__title text-[#FFB800]" data-default="Не подтверждён">Куплен</div>
+															<div class="__select__content">
+
+																<input id="singleSelect0" class="__select__input" type="radio" name="singleSelect" checked />
+																<label for="singleSelect0" class="__select__label hover:bg-[#FF5C00] text-[#FFB800]">Куплен</label>
+
+																<input id="singleSelect2" class="__select__input" type="radio" name="singleSelect" />
+																<label for="singleSelect2" class="__select__label hover:bg-[#FF0000] text-[#FF0000]">Не подтверждён</label>
+
+																<input id="singleSelect1" class="__select__input" type="radio" name="singleSelect" />
+																<label for="singleSelect1" class="__select__label hover:bg-[#FF5C00] text-[#FF5C00]">Подтверждён</label>
+
+																<input id="singleSelect3" class="__select__input" type="radio" name="singleSelect" />
+																<label for="singleSelect3" class="__select__label hover:bg-[#00FF1A] text-[#00FF1A]">Отправлен</label>
+
+																<input id="singleSelect4" class="__select__input" type="radio" name="singleSelect" />
+																<label for="singleSelect4" class="__select__label hover:bg-[#8FFF00] text-[#8FFF00]">Получен</label>
+
+															</div>
+														</div>';
+													} elseif ($row['state'] == 'Отправлен'){
+														echo
+															'<input class="hidden" type="text" name="myVar" id="myVar_'.$row['id'].'" />
+															<div class="__select" data-state="">
+															<div class="__select__title text-[#00FF1A]" data-default="Не подтверждён">Отправлен</div>
+															<div class="__select__content">
+
+																<input id="singleSelect0" class="__select__input" type="radio" name="singleSelect" checked />
+																<label for="singleSelect0" class="__select__label hover:bg-[#FF5C00] text-[#00FF1A]">Отправлен</label>
+
+																<input id="singleSelect3" class="__select__input" type="radio" name="singleSelect" />
+																<label for="singleSelect3" class="__select__label hover:bg-[#FF0000] text-[#FF0000]">Не подтверждён</label>
+
+																<input id="singleSelect1" class="__select__input" type="radio" name="singleSelect" />
+																<label for="singleSelect1" class="__select__label hover:bg-[#FF5C00] text-[#FF5C00]">Подтверждён</label>
+
+																<input id="singleSelect2" class="__select__input" type="radio" name="singleSelect" />
+																<label for="singleSelect2" class="__select__label hover:bg-[#FFB800] text-[#FFB800]">Куплен</label>
+
+																<input id="singleSelect4" class="__select__input" type="radio" name="singleSelect" />
+																<label for="singleSelect4" class="__select__label hover:bg-[#8FFF00] text-[#8FFF00]">Получен</label>
+
+															</div>
+														</div>';
+													} elseif ($row['state'] == 'Получен'){
+														echo
+															'<input class="hidden" type="text" name="myVar" id="myVar_'.$row['id'].'" />
+															<div class="__select" data-state="">
+															<div class="__select__title text-[#8FFF00]" data-default="Не подтверждён">Получен</div>
+															<div class="__select__content">
+
+																<input id="singleSelect0" class="__select__input" type="radio" name="singleSelect" checked />
+																<label for="singleSelect0" class="__select__label hover:bg-[#8FFF00] text-[#8FFF00]">Получен</label>
+
+																<input id="singleSelect4" class="__select__input" type="radio" name="singleSelect" />
+																<label for="singleSelect4" class="__select__label hover:bg-[#FF0000] text-[#FF0000]">Не подтверждён</label>
+
+																<input id="singleSelect1" class="__select__input" type="radio" name="singleSelect" />
+																<label for="singleSelect1" class="__select__label hover:bg-[#FF5C00] text-[#FF5C00]">Подтверждён</label>
+
+																<input id="singleSelect2" class="__select__input" type="radio" name="singleSelect" />
+																<label for="singleSelect2" class="__select__label hover:bg-[#FFB800] text-[#FFB800]">Куплен</label>
+
+																<input id="singleSelect3" class="__select__input" type="radio" name="singleSelect" />
+																<label for="singleSelect3" class="__select__label hover:bg-[#00FF1A] text-[#00FF1A]">Отправлен</label>
+
+															</div>
+														</div>';
+													}
 										?>
 									</form>
 
-									<form id="form_<?=$row['id']?>">
-									  <div class="__select" data-state="">
-									    <div class="__select__title" data-default="Option 0">Option 0</div>
-									    <div class="__select__content">
-									      <input id="singleSelect0" class="__select__input" type="radio" name="singleSelect" checked />
-									      <label for="singleSelect0" class="__select__label">Option 0</label>
-									      <input id="singleSelect1" class="__select__input" type="radio" name="singleSelect" />
-									      <label for="singleSelect1" class="__select__label">Option 1</label>
-									      <input id="singleSelect2" class="__select__input" type="radio" name="singleSelect" />
-									      <label for="singleSelect2" class="__select__label">Option 2</label>
-									      <input id="singleSelect3" class="__select__input" type="radio" name="singleSelect" />
-									      <label for="singleSelect3" class="__select__label">Option 3</label>
-									      <input id="singleSelect4" class="__select__input" type="radio" name="singleSelect" />
-									      <label for="singleSelect4" class="__select__label">Option 4</label>
-									    </div>
-									  </div>
-									</form>
+									
 
 									<script>
-										// анимация
+
+										// имитированный Select / Options
 										const selectSingle_<?=$row['id']?> = document.querySelector('#form_<?=$row['id']?> .__select');
 										const selectSingle_title_<?=$row['id']?> = selectSingle_<?=$row['id']?>.querySelector('.__select__title');
 										const selectSingle_labels_<?=$row['id']?> = selectSingle_<?=$row['id']?>.querySelectorAll('.__select__label');
@@ -151,16 +257,30 @@
 										// Close when click to option
 										for (let i = 0; i < selectSingle_labels_<?=$row['id']?>.length; i++) {
 										  selectSingle_labels_<?=$row['id']?>[i].addEventListener('click', (evt) => {
-										    selectSingle_title_<?=$row['id']?>.textContent = evt.target.textContent;
+										    // selectSingle_title_<?=$row['id']?>.textContent = evt.target.innerText; // или evt.target.innerHTML
 										    selectSingle_<?=$row['id']?>.setAttribute('data-state', '');
+
+										    var form = document.getElementById('form_<?=$row['id']?>');
+
+										    const myVarInput = document.getElementById('myVar_<?= $row['id'] ?>');
+										    myVarInput.value = evt.target.innerText; // или evt.target.innerHTML
+
+										    form.submit();
 										  });
 										}
 
-										//автоматическая отправка в оброботчик
-					                document.getElementById('select_<?=$row['id']?>').addEventListener('change', function() {
-					                    var form = document.getElementById('form_<?=$row['id']?>');
-					                    form.submit();
-					                });
+										// Закрытие списка при клике вне него
+										document.addEventListener('click', (evt) => {
+										  if (!selectSingle_<?=$row['id']?>.contains(evt.target)) {
+										    selectSingle_<?=$row['id']?>.setAttribute('data-state', '');
+										  }
+										});
+
+										// //автоматическая отправка в оброботчик
+					               //  document.getElementById('select_<?=$row['id']?>').addEventListener('change', function() {
+					               //      var form = document.getElementById('form_<?=$row['id']?>');
+					               //      form.submit();
+					               //  });
       							</script>
 
 								</div>
@@ -177,5 +297,20 @@
 		<!-- @import './HTML/footer.html' -->
 
 	</div>
+	<script>
+		let cords = ['scrollX','scrollY']; 
+		// сохраняем позицию скролла в localStorage
+		window.addEventListener('unload', e => cords.forEach(cord => localStorage[cord] = window[cord])); 
+		// вешаем событие на загрузку (ресурсов) страницы
+		window.addEventListener('load', e => {
+		    // если в localStorage имеются данные
+		    if (localStorage[cords[0]]) {
+		        // скроллим к сохраненным координатам
+		        window.scroll(...cords.map(cord => localStorage[cord]));
+		        // удаляем данные с localStorage
+		        cords.forEach(cord => localStorage.removeItem(cord));
+		    }
+		});
+	</script>
 </body>
 </html>
