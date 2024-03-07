@@ -9,8 +9,6 @@
 
 	$id = $_SESSION['user']['id'];
 
-	// $_SESSION['messageReg'] = "$login успешно зарегистрирован(а), пожалуйста, авторизируйтесь! :)";
-
 	$path = 'img/avatars/' . time() . $_FILES['avatar']['name'];
 	move_uploaded_file($_FILES['avatar']['tmp_name'], '../' . $path);
 

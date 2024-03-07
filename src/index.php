@@ -4,10 +4,8 @@
 	error_reporting(E_ALL);
 	
 	session_start();
-	if($_SESSION['user']) {
+	if($_SESSION['user']){
 		header('Location: profile.php');
-	} elseif ($_SESSION['admin']) {
-		header('Location: admin.php');
 	}
 ?>
 
@@ -232,7 +230,6 @@
 
 	<script>
 		function showDialogAuth(){
-			// window.location.href = 'index.php#myModal';
 			let dialog = document.getElementById('dialogAuth');
 			dialog.classList.remove('hidden');
 			dialog.classList.add('flex');

@@ -116,7 +116,7 @@
 						</form>
 
 						<!-- Чудо скрипт от You.com, который активирует куки файлы и при достижени лимита - блокирует нажатия :) -->
-						<script>
+					<!-- 	<script>
 						    var button = document.getElementById('myButton');
 						    var clickCount = getCookie('clickCount');
 
@@ -147,7 +147,7 @@
 						        }
 						        return 0;
 						    }
-						</script>
+						</script> -->
 						<script>
 							let cords = ['scrollX','scrollY']; 
 							// сохраняем позицию скролла в localStorage
