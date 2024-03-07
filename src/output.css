@@ -610,6 +610,10 @@ video {
   left: 1.25rem;
 }
 
+.right-2 {
+  right: 0.5rem;
+}
+
 .right-\[-100px\] {
   right: -100px;
 }
@@ -628,6 +632,10 @@ video {
 
 .top-2\/4 {
   top: 50%;
+}
+
+.top-8 {
+  top: 2rem;
 }
 
 .top-\[-100px\] {
@@ -777,10 +785,6 @@ video {
   height: 1.75rem;
 }
 
-.h-\[50\%\] {
-  height: 50%;
-}
-
 .h-\[500px\] {
   height: 500px;
 }
@@ -799,10 +803,6 @@ video {
 
 .h-screen {
   height: 100vh;
-}
-
-.h-1\/2 {
-  height: 50%;
 }
 
 .min-h-full {

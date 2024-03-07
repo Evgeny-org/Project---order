@@ -1,7 +1,7 @@
 <?php
-	ini_set('display_errors', 0);
-	ini_set('display_startup_errors', 0);
-	error_reporting(E_ALL);
+	// ini_set('display_errors', 0);
+	// ini_set('display_startup_errors', 0);
+	// error_reporting(E_ALL);
 
 	session_start();
 	if(!$_SESSION['admin']){
@@ -270,10 +270,10 @@
 												<div class="w-full h-full">
 													<form id="form_<?=$row['photos']?>" class="w-full h-full flex flex-col text-black" action="./PHP_vendor/change_photo.php" method="post" enctype="multipart/form-data">
 														<input type="hidden" name="photo_id" value="<?=$row['photos']?>">
-														<p><?=$row['photos']?></p>
+														<!-- <p><?=$row['photos']?></p> -->
 
 														<?php
-															$photo = mysqli_query($connect, "SELECT `one`, `two` FROM `orders` JOIN `photos` ON `orders`.`photos` = `photos`.`id` WHERE `photos`.`id` = '".$row["photos"]."'");
+															$photo = mysqli_query($connect, "SELECT `photos`.`id` AS `id`, `one`, `two`, `three`, `four`, `five`, `six`, `seven`, `eight`, `nine`, `ten` FROM `orders` JOIN `photos` ON `orders`.`photos` = `photos`.`id` WHERE `photos`.`id` = '".$row["photos"]."'");
 															$photo_col = mysqli_fetch_assoc($photo);
 															// print_r($photo_col);
 														?>
@@ -289,10 +289,26 @@
 
 																		<img class="absolute z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] photoIn" src="./img/free-icon-plus-3398952.png" alt="">
 																	</label>
-																	<input id="photo_<?=$row['photos']?>" class="invisible" type="file" accept="image/*" name="photo1"> 
+																	<input id="photo_<?=$row['photos']?>" class="invisible" type="file" accept="image/*" name="photo1">
+
+																	<input type="hidden" class="delPhoto_<?=$row['photos']?>" name="delPhoto_<?=$row['photos']?>" value="true">
+
+																	<!-- Удалить фото 1 -->
+																	<button type="button" class="w-12 h-12 absolute top-2 right-2 focus:outline-0" onclick="deletePhoto1(<?=$row['photos']?>)">
+																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] rotate-45 z-10"></div>
+																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] -rotate-45"></div>
+																	</button>
 																</div>
 
-																<script type="text/javascript">
+																<script>
+																	// false input для того, чтобы типа нет фото
+																	function deletePhoto1(photoId) {
+																		var photoId_ = document.getElementById('img_' + photoId);
+																		photoId_.src = '';
+																		document.querySelector('.delPhoto_' + photoId).value = 'false';
+																	}
+
+																	// даёт src фото, то есть путь к файлу, который выбрается в окне выбора изображения
 																	window.addEventListener('load', function() {
 																	  document.querySelector('input#photo_<?=$row['photos']?>').addEventListener('change', function() {
 																	      if (this.files && this.files[0]) {
@@ -302,40 +318,14 @@
 																	          }
 
 																	          img.src = URL.createObjectURL(this.files[0]); // set src to blob url
+																	          // true input для того, чтобы типа есть фото
+																	          document.querySelector('.delPhoto_<?=$row['photos']?>').value = 'true';
 																	      }
 																	  });
 																	});
 																</script>
 
 															<!-- Фото №2 -->
-																<div class="w-[20%] bg-[#D9D9D9] relative">
-																	<label for="photo_<?=$row['photos']?>0" class="w-full h-full absolute top-0 left-0 avatarOut">
-
-																		<div class="w-full h-full absolute top-0 left-0">
-																			<img id="img_<?=$row['photos']?>0" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] opacity-25" src="<?=$photo_col['two']?>" alt="">
-																		</div>
-
-																		<img class="absolute z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] photoIn" src="./img/free-icon-plus-3398952.png" alt="">
-																	</label>
-																	<input id="photo_<?=$row['photos']?>0" class="invisible" type="file" accept="image/*" name="photo2"> 
-																</div>
-
-																<script type="text/javascript">
-																	window.addEventListener('load', function() {
-																	  document.querySelector('input#photo_<?=$row['photos']?>0').addEventListener('change', function() {
-																	      if (this.files && this.files[0]) {
-																	          var img = document.querySelector('img#img_<?=$row['photos']?>0');
-																	          img.onload = () => {
-																	              URL.revokeObjectURL(img.src);  // no longer needed, free memory
-																	          }
-
-																	          img.src = URL.createObjectURL(this.files[0]); // set src to blob url
-																	      }
-																	  });
-																	});
-																</script>
-
-															<!-- Фото №3 -->
 																<div class="w-[20%] bg-[#D9D9D9] relative">
 																	<label for="photo_<?=$row['photos']?>1" class="w-full h-full absolute top-0 left-0 avatarOut">
 
@@ -345,10 +335,24 @@
 
 																		<img class="absolute z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] photoIn" src="./img/free-icon-plus-3398952.png" alt="">
 																	</label>
-																	<input id="photo_<?=$row['photos']?>1" class="invisible" type="file" accept="image/*" name="photo3"> 
+																	<input id="photo_<?=$row['photos']?>1" class="invisible" type="file" accept="image/*" name="photo2"> 
+
+																	<input type="hidden" class="delPhoto_<?=$row['photos']?>1" name="delPhoto_<?=$row['photos']?>1" value="true">
+
+																	<!-- Удалить фото 1 -->
+																	<button type="button" class="w-12 h-12 absolute top-8 right-2 focus:outline-0" onclick="deletePhoto2(<?=$row['photos']?>1)">
+																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] rotate-45 z-10"></div>
+																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] -rotate-45"></div>
+																	</button>
 																</div>
 
-																<script type="text/javascript">
+																<script>
+																	function deletePhoto2(photoId) {
+																		var photoId_ = document.getElementById('img_' + photoId);
+																		photoId_.src = '';
+																		document.querySelector('.delPhoto_' + photoId).value = 'false';
+																	}
+
 																	window.addEventListener('load', function() {
 																	  document.querySelector('input#photo_<?=$row['photos']?>1').addEventListener('change', function() {
 																	      if (this.files && this.files[0]) {
@@ -358,6 +362,50 @@
 																	          }
 
 																	          img.src = URL.createObjectURL(this.files[0]); // set src to blob url
+																	          document.querySelector('.delPhoto_<?=$row['photos']?>1').value = 'true';
+																	      }
+																	  });
+																	});
+																</script>
+
+															<!-- Фото №3 -->
+																<div class="w-[20%] bg-[#D9D9D9] relative">
+																	<label for="photo_<?=$row['photos']?>2" class="w-full h-full absolute top-0 left-0 avatarOut">
+
+																		<div class="w-full h-full absolute top-0 left-0">
+																			<img id="img_<?=$row['photos']?>2" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] opacity-25" src="<?=$photo_col['three']?>" alt="">
+																		</div>
+
+																		<img class="absolute z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] photoIn" src="./img/free-icon-plus-3398952.png" alt="">
+																	</label>
+																	<input id="photo_<?=$row['photos']?>2" class="invisible" type="file" accept="image/*" name="photo3"> 
+																
+																	<input type="hidden" class="delPhoto_<?=$row['photos']?>2" name="delPhoto_<?=$row['photos']?>2" value="true">
+
+																	<!-- Удалить фото 3 -->
+																	<button type="button" class="w-12 h-12 absolute top-8 right-2 focus:outline-0" onclick="deletePhoto2(<?=$row['photos']?>2)">
+																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] rotate-45 z-10"></div>
+																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] -rotate-45"></div>
+																	</button>
+																</div>
+
+																<script>
+																	function deletePhoto3(photoId) {
+																		var photoId_ = document.getElementById('img_' + photoId);
+																		photoId_.src = '';
+																		document.querySelector('.delPhoto_' + photoId).value = 'false';
+																	}
+
+																	window.addEventListener('load', function() {
+																	  document.querySelector('input#photo_<?=$row['photos']?>2').addEventListener('change', function() {
+																	      if (this.files && this.files[0]) {
+																	          var img = document.querySelector('img#img_<?=$row['photos']?>2');
+																	          img.onload = () => {
+																	              URL.revokeObjectURL(img.src);  // no longer needed, free memory
+																	          }
+
+																	          img.src = URL.createObjectURL(this.files[0]); // set src to blob url
+																	          document.querySelector('.delPhoto_<?=$row['photos']?>2').value = 'true';
 																	      }
 																	  });
 																	});
@@ -365,85 +413,130 @@
 
 															<!-- Фото №4 -->
 																<div class="w-[20%] bg-[#D9D9D9] relative">
-																	<label for="photo_<?=$row['photos']?>0" class="w-full h-full absolute top-0 left-0 avatarOut">
+																	<label for="photo_<?=$row['photos']?>3" class="w-full h-full absolute top-0 left-0 avatarOut">
 
-																		<div class="w-full h-full absolute top-0 left-0">
-																			<img id="img_<?=$row['photos']?>0" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] opacity-25" src="<?=$photo_col['two']?>" alt="">
+																		<div class="w-full h-full absolute top-0">
+																			<img id="img_<?=$row['photos']?>3" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] opacity-25" src="<?=$photo_col['four']?>" alt="">
 																		</div>
 
 																		<img class="absolute z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] photoIn" src="./img/free-icon-plus-3398952.png" alt="">
 																	</label>
-																	<input id="photo_<?=$row['photos']?>0" class="invisible" type="file" accept="image/*" name="photo2"> 
+																	<input id="photo_<?=$row['photos']?>3" class="invisible" type="file" accept="image/*" name="photo4"> 
+
+																	<input type="hidden" class="delPhoto_<?=$row['photos']?>3" name="delPhoto_<?=$row['photos']?>3" value="true">
+
+																	<!-- Удалить фото 4 -->
+																	<button type="button" class="w-12 h-12 absolute top-8 right-2 focus:outline-0" onclick="deletePhoto2(<?=$row['photos']?>3)">
+																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] rotate-45 z-10"></div>
+																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] -rotate-45"></div>
+																	</button>
 																</div>
 
-																<script type="text/javascript">
+																<script>
+																	function deletePhoto4(photoId) {
+																		var photoId_ = document.getElementById('img_' + photoId);
+																		photoId_.src = '';
+																		document.querySelector('.delPhoto_' + photoId).value = 'false';
+																	}
+
 																	window.addEventListener('load', function() {
-																	  document.querySelector('input#photo_<?=$row['photos']?>0').addEventListener('change', function() {
+																	  document.querySelector('input#photo_<?=$row['photos']?>3').addEventListener('change', function() {
 																	      if (this.files && this.files[0]) {
-																	          var img = document.querySelector('img#img_<?=$row['photos']?>0');
+																	          var img = document.querySelector('img#img_<?=$row['photos']?>3');
 																	          img.onload = () => {
 																	              URL.revokeObjectURL(img.src);  // no longer needed, free memory
 																	          }
 
 																	          img.src = URL.createObjectURL(this.files[0]); // set src to blob url
+																	          document.querySelector('.delPhoto_<?=$row['photos']?>3').value = 'true';
 																	      }
 																	  });
 																	});
 																</script>
 
 															<!-- Фото №5 -->
-															<div class="w-[20%] bg-[#D9D9D9] relative">
-																<label for="photo_<?=$row['photos']?>0" class="w-full h-full absolute top-0 left-0 avatarOut">
-
-																	<div class="w-full h-full absolute top-0 left-0">
-																		<img id="img_<?=$row['photos']?>0" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] opacity-25" src="<?=$photo_col['two']?>" alt="">
-																	</div>
-
-																	<img class="absolute z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] photoIn" src="./img/free-icon-plus-3398952.png" alt="">
-																</label>
-																<input id="photo_<?=$row['photos']?>0" class="invisible" type="file" accept="image/*" name="photo2"> 
-															</div>
-
-															<script type="text/javascript">
-																window.addEventListener('load', function() {
-																  document.querySelector('input#photo_<?=$row['photos']?>0').addEventListener('change', function() {
-																      if (this.files && this.files[0]) {
-																          var img = document.querySelector('img#img_<?=$row['photos']?>0');
-																          img.onload = () => {
-																              URL.revokeObjectURL(img.src);  // no longer needed, free memory
-																          }
-
-																          img.src = URL.createObjectURL(this.files[0]); // set src to blob url
-																      }
-																  });
-																});
-															</script>
-														</div>
-
-														<div class="flex w-full h-full">
-															<!-- Фото №6 -->
 																<div class="w-[20%] bg-[#D9D9D9] relative">
-																	<label for="photo_<?=$row['photos']?>0" class="w-full h-full absolute top-0 left-0 avatarOut">
+																	<label for="photo_<?=$row['photos']?>4" class="w-full h-full absolute top-0 left-0 avatarOut">
 
 																		<div class="w-full h-full absolute top-0 left-0">
-																			<img id="img_<?=$row['photos']?>0" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] opacity-25" src="<?=$photo_col['two']?>" alt="">
+																			<img id="img_<?=$row['photos']?>4" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] opacity-25" src="<?=$photo_col['five']?>" alt="">
 																		</div>
 
 																		<img class="absolute z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] photoIn" src="./img/free-icon-plus-3398952.png" alt="">
 																	</label>
-																	<input id="photo_<?=$row['photos']?>0" class="invisible" type="file" accept="image/*" name="photo2"> 
+																	<input id="photo_<?=$row['photos']?>4" class="invisible" type="file" accept="image/*" name="photo5"> 
+
+																	<input type="hidden" class="delPhoto_<?=$row['photos']?>4" name="delPhoto_<?=$row['photos']?>4" value="true">
+
+																	<!-- Удалить фото 4 -->
+																	<button type="button" class="w-12 h-12 absolute top-8 right-2 focus:outline-0" onclick="deletePhoto2(<?=$row['photos']?>4)">
+																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] rotate-45 z-10"></div>
+																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] -rotate-45"></div>
+																	</button>
 																</div>
 
-																<script type="text/javascript">
+																<script>
+																	function deletePhoto5(photoId) {
+																		var photoId_ = document.getElementById('img_' + photoId);
+																		photoId_.src = '';
+																		document.querySelector('.delPhoto_' + photoId).value = 'false';
+																	}
+
 																	window.addEventListener('load', function() {
-																	  document.querySelector('input#photo_<?=$row['photos']?>0').addEventListener('change', function() {
+																	  document.querySelector('input#photo_<?=$row['photos']?>4').addEventListener('change', function() {
 																	      if (this.files && this.files[0]) {
-																	          var img = document.querySelector('img#img_<?=$row['photos']?>0');
+																	          var img = document.querySelector('img#img_<?=$row['photos']?>4');
 																	          img.onload = () => {
 																	              URL.revokeObjectURL(img.src);  // no longer needed, free memory
 																	          }
 
 																	          img.src = URL.createObjectURL(this.files[0]); // set src to blob url
+																	          document.querySelector('.delPhoto_<?=$row['photos']?>4').value = 'true';
+																	      }
+																	  });
+																	});
+																</script>
+														</div>
+
+														<div class="flex w-full h-full">
+															<!-- Фото №6 -->
+																 <div class="w-[20%] bg-[#D9D9D9] relative">
+																	<label for="photo_<?=$row['photos']?>5" class="w-full h-full absolute top-0 left-0 avatarOut">
+
+																		<div class="w-full h-full absolute top-0 left-0">
+																			<img id="img_<?=$row['photos']?>5" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] opacity-25" src="<?=$photo_col['six']?>" alt="">
+																		</div>
+
+																		<img class="absolute z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] photoIn" src="./img/free-icon-plus-3398952.png" alt="">
+																	</label>
+																	<input id="photo_<?=$row['photos']?>5" class="invisible" type="file" accept="image/*" name="photo6"> 
+
+																	<input type="hidden" class="delPhoto_<?=$row['photos']?>5" name="delPhoto_<?=$row['photos']?>5" value="true">
+
+																	<!-- Удалить фото 5 -->
+																	<button type="button" class="w-12 h-12 absolute top-8 right-2 focus:outline-0" onclick="deletePhoto2(<?=$row['photos']?>5)">
+																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] rotate-45 z-10"></div>
+																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] -rotate-45"></div>
+																	</button>
+																</div>
+
+																<script>
+																	function deletePhoto6(photoId) {
+																		var photoId_ = document.getElementById('img_' + photoId);
+																		photoId_.src = '';
+																		document.querySelector('.delPhoto_' + photoId).value = 'false';
+																	}
+
+																	window.addEventListener('load', function() {
+																	  document.querySelector('input#photo_<?=$row['photos']?>5').addEventListener('change', function() {
+																	      if (this.files && this.files[0]) {
+																	          var img = document.querySelector('img#img_<?=$row['photos']?>5');
+																	          img.onload = () => {
+																	              URL.revokeObjectURL(img.src);  // no longer needed, free memory
+																	          }
+
+																	          img.src = URL.createObjectURL(this.files[0]); // set src to blob url
+																	          document.querySelector('.delPhoto_<?=$row['photos']?>5').value = 'true';
 																	      }
 																	  });
 																	});
@@ -451,27 +544,42 @@
 
 															<!-- Фото №7 -->
 																<div class="w-[20%] bg-[#D9D9D9] relative">
-																	<label for="photo_<?=$row['photos']?>0" class="w-full h-full absolute top-0 left-0 avatarOut">
+																	<label for="photo_<?=$row['photos']?>6" class="w-full h-full absolute top-0 left-0 avatarOut">
 
 																		<div class="w-full h-full absolute top-0 left-0">
-																			<img id="img_<?=$row['photos']?>0" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] opacity-25" src="<?=$photo_col['two']?>" alt="">
+																			<img id="img_<?=$row['photos']?>6" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] opacity-25" src="<?=$photo_col['seven']?>" alt="">
 																		</div>
 
 																		<img class="absolute z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] photoIn" src="./img/free-icon-plus-3398952.png" alt="">
 																	</label>
-																	<input id="photo_<?=$row['photos']?>0" class="invisible" type="file" accept="image/*" name="photo2"> 
+																	<input id="photo_<?=$row['photos']?>6" class="invisible" type="file" accept="image/*" name="photo7"> 
+
+																	<input type="hidden" class="delPhoto_<?=$row['photos']?>6" name="delPhoto_<?=$row['photos']?>6" value="true">
+
+																	<!-- Удалить фото 7 -->
+																	<button type="button" class="w-12 h-12 absolute top-8 right-2 focus:outline-0" onclick="deletePhoto2(<?=$row['photos']?>6)">
+																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] rotate-45 z-10"></div>
+																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] -rotate-45"></div>
+																	</button>
 																</div>
 
-																<script type="text/javascript">
+																<script>
+																	function deletePhoto7(photoId) {
+																		var photoId_ = document.getElementById('img_' + photoId);
+																		photoId_.src = '';
+																		document.querySelector('.delPhoto_' + photoId).value = 'false';
+																	}
+
 																	window.addEventListener('load', function() {
-																	  document.querySelector('input#photo_<?=$row['photos']?>0').addEventListener('change', function() {
+																	  document.querySelector('input#photo_<?=$row['photos']?>6').addEventListener('change', function() {
 																	      if (this.files && this.files[0]) {
-																	          var img = document.querySelector('img#img_<?=$row['photos']?>0');
+																	          var img = document.querySelector('img#img_<?=$row['photos']?>6');
 																	          img.onload = () => {
 																	              URL.revokeObjectURL(img.src);  // no longer needed, free memory
 																	          }
 
 																	          img.src = URL.createObjectURL(this.files[0]); // set src to blob url
+																	          document.querySelector('.delPhoto_<?=$row['photos']?>6').value = 'true';
 																	      }
 																	  });
 																	});
@@ -479,27 +587,42 @@
 
 															<!-- Фото №8 -->
 																<div class="w-[20%] bg-[#D9D9D9] relative">
-																	<label for="photo_<?=$row['photos']?>0" class="w-full h-full absolute top-0 left-0 avatarOut">
+																	<label for="photo_<?=$row['photos']?>7" class="w-full h-full absolute top-0 left-0 avatarOut">
 
 																		<div class="w-full h-full absolute top-0 left-0">
-																			<img id="img_<?=$row['photos']?>0" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] opacity-25" src="<?=$photo_col['two']?>" alt="">
+																			<img id="img_<?=$row['photos']?>7" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] opacity-25" src="<?=$photo_col['eight']?>" alt="">
 																		</div>
 
 																		<img class="absolute z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] photoIn" src="./img/free-icon-plus-3398952.png" alt="">
 																	</label>
-																	<input id="photo_<?=$row['photos']?>0" class="invisible" type="file" accept="image/*" name="photo2"> 
+																	<input id="photo_<?=$row['photos']?>7" class="invisible" type="file" accept="image/*" name="photo8"> 
+
+																	<input type="hidden" class="delPhoto_<?=$row['photos']?>7" name="delPhoto_<?=$row['photos']?>7" value="true">
+
+																	<!-- Удалить фото 8 -->
+																	<button type="button" class="w-12 h-12 absolute top-8 right-2 focus:outline-0" onclick="deletePhoto2(<?=$row['photos']?>7)">
+																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] rotate-45 z-10"></div>
+																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] -rotate-45"></div>
+																	</button>
 																</div>
 
-																<script type="text/javascript">
+																<script>
+																	function deletePhoto8(photoId) {
+																		var photoId_ = document.getElementById('img_' + photoId);
+																		photoId_.src = '';
+																		document.querySelector('.delPhoto_' + photoId).value = 'false';
+																	}
+
 																	window.addEventListener('load', function() {
-																	  document.querySelector('input#photo_<?=$row['photos']?>0').addEventListener('change', function() {
+																	  document.querySelector('input#photo_<?=$row['photos']?>7').addEventListener('change', function() {
 																	      if (this.files && this.files[0]) {
-																	          var img = document.querySelector('img#img_<?=$row['photos']?>0');
+																	          var img = document.querySelector('img#img_<?=$row['photos']?>7');
 																	          img.onload = () => {
 																	              URL.revokeObjectURL(img.src);  // no longer needed, free memory
 																	          }
 
 																	          img.src = URL.createObjectURL(this.files[0]); // set src to blob url
+																	          document.querySelector('.delPhoto_<?=$row['photos']?>7').value = 'true';
 																	      }
 																	  });
 																	});
@@ -507,27 +630,42 @@
 
 															<!-- Фото №9 -->
 																<div class="w-[20%] bg-[#D9D9D9] relative">
-																	<label for="photo_<?=$row['photos']?>0" class="w-full h-full absolute top-0 left-0 avatarOut">
+																	<label for="photo_<?=$row['photos']?>8" class="w-full h-full absolute top-0 left-0 avatarOut">
 
 																		<div class="w-full h-full absolute top-0 left-0">
-																			<img id="img_<?=$row['photos']?>0" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] opacity-25" src="<?=$photo_col['two']?>" alt="">
+																			<img id="img_<?=$row['photos']?>8" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] opacity-25" src="<?=$photo_col['nine']?>" alt="">
 																		</div>
 
 																		<img class="absolute z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] photoIn" src="./img/free-icon-plus-3398952.png" alt="">
 																	</label>
-																	<input id="photo_<?=$row['photos']?>0" class="invisible" type="file" accept="image/*" name="photo2"> 
+																	<input id="photo_<?=$row['photos']?>8" class="invisible" type="file" accept="image/*" name="photo9"> 
+
+																	<input type="hidden" class="delPhoto_<?=$row['photos']?>8" name="delPhoto_<?=$row['photos']?>8" value="true">
+
+																	<!-- Удалить фото 9 -->
+																	<button type="button" class="w-12 h-12 absolute top-8 right-2 focus:outline-0" onclick="deletePhoto2(<?=$row['photos']?>8)">
+																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] rotate-45 z-10"></div>
+																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] -rotate-45"></div>
+																	</button>
 																</div>
 
-																<script type="text/javascript">
+																<script>
+																	function deletePhoto9(photoId) {
+																		var photoId_ = document.getElementById('img_' + photoId);
+																		photoId_.src = '';
+																		document.querySelector('.delPhoto_' + photoId).value = 'false';
+																	}
+
 																	window.addEventListener('load', function() {
-																	  document.querySelector('input#photo_<?=$row['photos']?>0').addEventListener('change', function() {
+																	  document.querySelector('input#photo_<?=$row['photos']?>8').addEventListener('change', function() {
 																	      if (this.files && this.files[0]) {
-																	          var img = document.querySelector('img#img_<?=$row['photos']?>0');
+																	          var img = document.querySelector('img#img_<?=$row['photos']?>8');
 																	          img.onload = () => {
 																	              URL.revokeObjectURL(img.src);  // no longer needed, free memory
 																	          }
 
 																	          img.src = URL.createObjectURL(this.files[0]); // set src to blob url
+																	          document.querySelector('.delPhoto_<?=$row['photos']?>8').value = 'true';
 																	      }
 																	  });
 																	});
@@ -535,35 +673,51 @@
 
 															<!-- Фото №10 -->
 																<div class="w-[20%] bg-[#D9D9D9] relative">
-																	<label for="photo_<?=$row['photos']?>0" class="w-full h-full absolute top-0 left-0 avatarOut">
+																	<label for="photo_<?=$row['photos']?>9" class="w-full h-full absolute top-0 left-0 avatarOut">
 
 																		<div class="w-full h-full absolute top-0 left-0">
-																			<img id="img_<?=$row['photos']?>0" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] opacity-25" src="<?=$photo_col['two']?>" alt="">
+																			<img id="img_<?=$row['photos']?>9" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] opacity-25" src="<?=$photo_col['ten']?>" alt="">
 																		</div>
 
 																		<img class="absolute z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] photoIn" src="./img/free-icon-plus-3398952.png" alt="">
 																	</label>
-																	<input id="photo_<?=$row['photos']?>0" class="invisible" type="file" accept="image/*" name="photo2"> 
+																	<input id="photo_<?=$row['photos']?>9" class="invisible" type="file" accept="image/*" name="photo10"> 
+
+																	<input type="hidden" class="delPhoto_<?=$row['photos']?>9" name="delPhoto_<?=$row['photos']?>9" value="true">
+
+																	<!-- Удалить фото 10 -->
+																	<button type="button" class="w-12 h-12 absolute top-8 right-2 focus:outline-0" onclick="deletePhoto2(<?=$row['photos']?>9)">
+																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] rotate-45 z-10"></div>
+																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] -rotate-45"></div>
+																	</button>
 																</div>
 
-																<script type="text/javascript">
+																<script>
+																	function deletePhoto10(photoId) {
+																		var photoId_ = document.getElementById('img_' + photoId);
+																		photoId_.src = '';
+																		document.querySelector('.delPhoto_' + photoId).value = 'false';
+																	}
+
 																	window.addEventListener('load', function() {
-																	  document.querySelector('input#photo_<?=$row['photos']?>0').addEventListener('change', function() {
+																	  document.querySelector('input#photo_<?=$row['photos']?>9').addEventListener('change', function() {
 																	      if (this.files && this.files[0]) {
-																	          var img = document.querySelector('img#img_<?=$row['photos']?>0');
+																	          var img = document.querySelector('img#img_<?=$row['photos']?>9');
 																	          img.onload = () => {
 																	              URL.revokeObjectURL(img.src);  // no longer needed, free memory
 																	          }
 
 																	          img.src = URL.createObjectURL(this.files[0]); // set src to blob url
+																	          document.querySelector('.delPhoto_<?=$row['photos']?>9').value = 'true';
 																	      }
 																	  });
 																	});
 																</script>
+
 														</div>
 
-														<button type="submit" class="block w-[400px] h-[75px] m-auto normal-case relative">
-															<div class="w-full h-full border-2 border-black bg-black text-white hover:bg-white hover:text-black duration-300">
+														<button type="submit" class="block w-[400px] m-auto normal-case relative">
+															<div class="w-full h-full border-2 border-black py-8 bg-black text-white hover:bg-white hover:text-black duration-300">
 																<p class="font-TNRB text-3xl  tracking-[.20em] whitespace-nowrap absolute top-2/4 left-2/4 translate-x-[-50%] translate-y-[-50%] mb-0">Сохранить</p>
 															</div>
 														</button>
