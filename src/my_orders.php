@@ -48,35 +48,38 @@
 									$counter++;
 									?>
 										<div class="flex py-8 text-3xl">
-											<p class="w-[150px] mr-20">Заказ №<?= $counter ?></p>
-											<form id="<?= $row['id'] ?>" class="w-[250px] flex mr-28 relative" action="./PHP_vendor/upload_file.php" method="post" enctype="multipart/form-data">
-												<a class="overflow-hidden text-[#4CAF50] hover:text-[#2E7D32] hover:underline transition:" href="<?= $row['excel'] ?>">
-													<?php 
-														if ($row['excel'] != './excels/Example.xlsx') {
-															echo substr(basename($row['excel']), 10);
-														} else {
-															echo basename($row['excel']);
-														}
-													?>
-												</a>
+											<!-- № Заказа -->
+												<p class="w-[150px] mr-20">Заказ №<?= $counter ?></p>
 
-													<input type="hidden" name="order_id" value="<?=$row['id']?>">
+											<!-- Excel загрзука / выгрузка -->
+												<form id="<?= $row['id'] ?>" class="w-[250px] flex mr-28 relative" action="./PHP_vendor/upload_file.php" method="post" enctype="multipart/form-data">
+													<a class="overflow-hidden text-[#4CAF50] hover:text-[#2E7D32] hover:underline transition:" href="<?= $row['excel'] ?>">
+														<?php 
+															if ($row['excel'] != './excels/Example.xlsx') {
+																echo substr(basename($row['excel']), 10);
+															} else {
+																echo basename($row['excel']);
+															}
+														?>
+													</a>
 
-													<label for="excel_<?= $row['id'] ?>">
-														<svg class="w-7 h-7 absolute top-[10%] right-[-15%] cursor-pointer text-[#7f7f7f] hover:text-[#007bff] transition" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-															<path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m6.75 12-3-3m0 0-3 3m3-3v6m-1.5-15H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-														</svg>
-													</label>
-													<input id="excel_<?= $row['id'] ?>" class="absolute invisible" type="file" accept=".xlsx" name="excel">
+														<input type="hidden" name="order_id" value="<?=$row['id']?>">
 
-											</form>
+														<label for="excel_<?= $row['id'] ?>">
+															<svg class="w-7 h-7 absolute top-[10%] right-[-15%] cursor-pointer text-[#7f7f7f] hover:text-[#007bff] transition" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+																<path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m6.75 12-3-3m0 0-3 3m3-3v6m-1.5-15H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+															</svg>
+														</label>
+														<input id="excel_<?= $row['id'] ?>" class="absolute invisible" type="file" accept=".xlsx" name="excel">
 
-											<script>
-						                document.getElementById('excel_<?= $row['id'] ?>').addEventListener('change', function() {
-						                    var form = document.getElementById('<?= $row['id'] ?>');
-						                    form.submit();
-						                });
-            							</script>
+												</form>
+
+												<script>
+							                document.getElementById('excel_<?= $row['id'] ?>').addEventListener('change', function() {
+							                    var form = document.getElementById('<?= $row['id'] ?>');
+							                    form.submit();
+							                });
+	            							</script>
 
 											<div class=""><?php
 												if ($row['state'] == 'Не подтверждён') {
@@ -115,7 +118,7 @@
 						    </button>
 						</form>
 
-						<!-- Чудо скрипт от You.com, который активирует куки файлы и при достижени лимита - блокирует нажатия :) -->
+						<!-- Чудо скрипт от юшки, который активирует куки файлы и при достижени лимита - блокирует нажатия :) -->
 					<!-- 	<script>
 						    var button = document.getElementById('myButton');
 						    var clickCount = getCookie('clickCount');

@@ -248,12 +248,28 @@
 										</form>
 
 									<!-- Действия с фото -->
+										<?php
+											$photo = mysqli_query($connect, "SELECT `photos`.`id` AS `id`, `one`, `two`, `three`, `four`, `five`, `six`, `seven`, `eight`, `nine`, `ten` FROM `orders` JOIN `photos` ON `orders`.`photos` = `photos`.`id` WHERE `photos`.`id` = '".$row["photos"]."'");
+											$photo_col = mysqli_fetch_assoc($photo);
+											// print_r($photo_col);
+										?>
+
 										<button onclick="showDialog_<?=$row['photos']?>()" class="mr-10 flex">
-											<div class="w-10 h-10 bg-[#e5e7eb] mr-4"></div>
-											<div class="w-10 h-10 bg-[#e5e7eb] mr-4"></div>
-											<div class="w-10 h-10 bg-[#e5e7eb] mr-4"></div>
-											<div class="w-10 h-10 bg-[#e5e7eb] mr-4"></div>
-											<div class="w-10 h-10 bg-[#e5e7eb]"></div>
+											<div class="w-10 h-10 bg-[#e5e7eb] mr-4 relative">
+												<img class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['one']?>" alt="">
+											</div>
+											<div class="w-10 h-10 bg-[#e5e7eb] mr-4 relative">
+												<img class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['two']?>" alt="">
+											</div>
+											<div class="w-10 h-10 bg-[#e5e7eb] mr-4 relative">
+												<img class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['three']?>" alt="">
+											</div>
+											<div class="w-10 h-10 bg-[#e5e7eb] mr-4 relative">
+												<img class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['four']?>" alt="">
+											</div>
+											<div class="w-10 h-10 bg-[#e5e7eb] relative">
+												<img class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['five']?>" alt="">
+											</div>
 										</button>
 
 										<div onclick="hideDialog_<?=$row['photos']?>()" id="dialog_<?=$row['photos']?>" class="w-screen h-screen fixed left-0 top-0 z-10 bg-black bg-opacity-50 flex justify-center items-center transition-opacity duration-300 opacity-0 hidden">
@@ -272,15 +288,10 @@
 														<input type="hidden" name="photo_id" value="<?=$row['photos']?>">
 														<!-- <p><?=$row['photos']?></p> -->
 
-														<?php
-															$photo = mysqli_query($connect, "SELECT `photos`.`id` AS `id`, `one`, `two`, `three`, `four`, `five`, `six`, `seven`, `eight`, `nine`, `ten` FROM `orders` JOIN `photos` ON `orders`.`photos` = `photos`.`id` WHERE `photos`.`id` = '".$row["photos"]."'");
-															$photo_col = mysqli_fetch_assoc($photo);
-															// print_r($photo_col);
-														?>
+														<div class="flex justify-between w-full h-full mb-5">
 
-														<div class="flex w-full h-full">
 															<!-- Фото №1 -->
-																<div class="w-[20%] bg-[#D9D9D9] relative">
+																<div class="w-[19%] bg-[#D9D9D9] relative">
 																	<label for="photo_<?=$row['photos']?>" class="w-full h-full absolute top-0 left-0 avatarOut">
 
 																		<div class="w-full h-full absolute top-0 left-0">
@@ -326,7 +337,7 @@
 																</script>
 
 															<!-- Фото №2 -->
-																<div class="w-[20%] bg-[#D9D9D9] relative">
+																<div class="w-[19%] bg-[#D9D9D9] relative">
 																	<label for="photo_<?=$row['photos']?>1" class="w-full h-full absolute top-0 left-0 avatarOut">
 
 																		<div class="w-full h-full absolute top-0 left-0">
@@ -340,7 +351,7 @@
 																	<input type="hidden" class="delPhoto_<?=$row['photos']?>1" name="delPhoto_<?=$row['photos']?>1" value="true">
 
 																	<!-- Удалить фото 1 -->
-																	<button type="button" class="w-12 h-12 absolute top-8 right-2 focus:outline-0" onclick="deletePhoto2(<?=$row['photos']?>1)">
+																	<button type="button" class="w-12 h-12 absolute top-2 right-2 focus:outline-0" onclick="deletePhoto2(<?=$row['photos']?>1)">
 																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] rotate-45 z-10"></div>
 																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] -rotate-45"></div>
 																	</button>
@@ -369,7 +380,7 @@
 																</script>
 
 															<!-- Фото №3 -->
-																<div class="w-[20%] bg-[#D9D9D9] relative">
+																<div class="w-[19%] bg-[#D9D9D9] relative">
 																	<label for="photo_<?=$row['photos']?>2" class="w-full h-full absolute top-0 left-0 avatarOut">
 
 																		<div class="w-full h-full absolute top-0 left-0">
@@ -383,7 +394,7 @@
 																	<input type="hidden" class="delPhoto_<?=$row['photos']?>2" name="delPhoto_<?=$row['photos']?>2" value="true">
 
 																	<!-- Удалить фото 3 -->
-																	<button type="button" class="w-12 h-12 absolute top-8 right-2 focus:outline-0" onclick="deletePhoto2(<?=$row['photos']?>2)">
+																	<button type="button" class="w-12 h-12 absolute top-2 right-2 focus:outline-0" onclick="deletePhoto2(<?=$row['photos']?>2)">
 																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] rotate-45 z-10"></div>
 																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] -rotate-45"></div>
 																	</button>
@@ -412,7 +423,7 @@
 																</script>
 
 															<!-- Фото №4 -->
-																<div class="w-[20%] bg-[#D9D9D9] relative">
+																<div class="w-[19%] bg-[#D9D9D9] relative">
 																	<label for="photo_<?=$row['photos']?>3" class="w-full h-full absolute top-0 left-0 avatarOut">
 
 																		<div class="w-full h-full absolute top-0">
@@ -426,7 +437,7 @@
 																	<input type="hidden" class="delPhoto_<?=$row['photos']?>3" name="delPhoto_<?=$row['photos']?>3" value="true">
 
 																	<!-- Удалить фото 4 -->
-																	<button type="button" class="w-12 h-12 absolute top-8 right-2 focus:outline-0" onclick="deletePhoto2(<?=$row['photos']?>3)">
+																	<button type="button" class="w-12 h-12 absolute top-2 right-2 focus:outline-0" onclick="deletePhoto2(<?=$row['photos']?>3)">
 																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] rotate-45 z-10"></div>
 																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] -rotate-45"></div>
 																	</button>
@@ -455,7 +466,7 @@
 																</script>
 
 															<!-- Фото №5 -->
-																<div class="w-[20%] bg-[#D9D9D9] relative">
+																<div class="w-[19%] bg-[#D9D9D9] relative">
 																	<label for="photo_<?=$row['photos']?>4" class="w-full h-full absolute top-0 left-0 avatarOut">
 
 																		<div class="w-full h-full absolute top-0 left-0">
@@ -469,7 +480,7 @@
 																	<input type="hidden" class="delPhoto_<?=$row['photos']?>4" name="delPhoto_<?=$row['photos']?>4" value="true">
 
 																	<!-- Удалить фото 4 -->
-																	<button type="button" class="w-12 h-12 absolute top-8 right-2 focus:outline-0" onclick="deletePhoto2(<?=$row['photos']?>4)">
+																	<button type="button" class="w-12 h-12 absolute top-2 right-2 focus:outline-0" onclick="deletePhoto2(<?=$row['photos']?>4)">
 																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] rotate-45 z-10"></div>
 																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] -rotate-45"></div>
 																	</button>
@@ -498,9 +509,9 @@
 																</script>
 														</div>
 
-														<div class="flex w-full h-full">
+														<div class="flex justify-between w-full h-full mb-10">
 															<!-- Фото №6 -->
-																 <div class="w-[20%] bg-[#D9D9D9] relative">
+																 <div class="w-[19%] bg-[#D9D9D9] relative">
 																	<label for="photo_<?=$row['photos']?>5" class="w-full h-full absolute top-0 left-0 avatarOut">
 
 																		<div class="w-full h-full absolute top-0 left-0">
@@ -514,7 +525,7 @@
 																	<input type="hidden" class="delPhoto_<?=$row['photos']?>5" name="delPhoto_<?=$row['photos']?>5" value="true">
 
 																	<!-- Удалить фото 5 -->
-																	<button type="button" class="w-12 h-12 absolute top-8 right-2 focus:outline-0" onclick="deletePhoto2(<?=$row['photos']?>5)">
+																	<button type="button" class="w-12 h-12 absolute top-2 right-2 focus:outline-0" onclick="deletePhoto2(<?=$row['photos']?>5)">
 																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] rotate-45 z-10"></div>
 																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] -rotate-45"></div>
 																	</button>
@@ -543,7 +554,7 @@
 																</script>
 
 															<!-- Фото №7 -->
-																<div class="w-[20%] bg-[#D9D9D9] relative">
+																<div class="w-[19%] bg-[#D9D9D9] relative">
 																	<label for="photo_<?=$row['photos']?>6" class="w-full h-full absolute top-0 left-0 avatarOut">
 
 																		<div class="w-full h-full absolute top-0 left-0">
@@ -557,7 +568,7 @@
 																	<input type="hidden" class="delPhoto_<?=$row['photos']?>6" name="delPhoto_<?=$row['photos']?>6" value="true">
 
 																	<!-- Удалить фото 7 -->
-																	<button type="button" class="w-12 h-12 absolute top-8 right-2 focus:outline-0" onclick="deletePhoto2(<?=$row['photos']?>6)">
+																	<button type="button" class="w-12 h-12 absolute top-2 right-2 focus:outline-0" onclick="deletePhoto2(<?=$row['photos']?>6)">
 																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] rotate-45 z-10"></div>
 																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] -rotate-45"></div>
 																	</button>
@@ -586,7 +597,7 @@
 																</script>
 
 															<!-- Фото №8 -->
-																<div class="w-[20%] bg-[#D9D9D9] relative">
+																<div class="w-[19%] bg-[#D9D9D9] relative">
 																	<label for="photo_<?=$row['photos']?>7" class="w-full h-full absolute top-0 left-0 avatarOut">
 
 																		<div class="w-full h-full absolute top-0 left-0">
@@ -600,7 +611,7 @@
 																	<input type="hidden" class="delPhoto_<?=$row['photos']?>7" name="delPhoto_<?=$row['photos']?>7" value="true">
 
 																	<!-- Удалить фото 8 -->
-																	<button type="button" class="w-12 h-12 absolute top-8 right-2 focus:outline-0" onclick="deletePhoto2(<?=$row['photos']?>7)">
+																	<button type="button" class="w-12 h-12 absolute top-2 right-2 focus:outline-0" onclick="deletePhoto2(<?=$row['photos']?>7)">
 																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] rotate-45 z-10"></div>
 																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] -rotate-45"></div>
 																	</button>
@@ -629,7 +640,7 @@
 																</script>
 
 															<!-- Фото №9 -->
-																<div class="w-[20%] bg-[#D9D9D9] relative">
+																<div class="w-[19%] bg-[#D9D9D9] relative">
 																	<label for="photo_<?=$row['photos']?>8" class="w-full h-full absolute top-0 left-0 avatarOut">
 
 																		<div class="w-full h-full absolute top-0 left-0">
@@ -643,7 +654,7 @@
 																	<input type="hidden" class="delPhoto_<?=$row['photos']?>8" name="delPhoto_<?=$row['photos']?>8" value="true">
 
 																	<!-- Удалить фото 9 -->
-																	<button type="button" class="w-12 h-12 absolute top-8 right-2 focus:outline-0" onclick="deletePhoto2(<?=$row['photos']?>8)">
+																	<button type="button" class="w-12 h-12 absolute top-2 right-2 focus:outline-0" onclick="deletePhoto2(<?=$row['photos']?>8)">
 																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] rotate-45 z-10"></div>
 																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] -rotate-45"></div>
 																	</button>
@@ -672,7 +683,7 @@
 																</script>
 
 															<!-- Фото №10 -->
-																<div class="w-[20%] bg-[#D9D9D9] relative">
+																<div class="w-[19%] bg-[#D9D9D9] relative">
 																	<label for="photo_<?=$row['photos']?>9" class="w-full h-full absolute top-0 left-0 avatarOut">
 
 																		<div class="w-full h-full absolute top-0 left-0">
@@ -686,7 +697,7 @@
 																	<input type="hidden" class="delPhoto_<?=$row['photos']?>9" name="delPhoto_<?=$row['photos']?>9" value="true">
 
 																	<!-- Удалить фото 10 -->
-																	<button type="button" class="w-12 h-12 absolute top-8 right-2 focus:outline-0" onclick="deletePhoto2(<?=$row['photos']?>9)">
+																	<button type="button" class="w-12 h-12 absolute top-2 right-2 focus:outline-0" onclick="deletePhoto2(<?=$row['photos']?>9)">
 																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] rotate-45 z-10"></div>
 																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] -rotate-45"></div>
 																	</button>
@@ -713,7 +724,6 @@
 																	  });
 																	});
 																</script>
-
 														</div>
 
 														<button type="submit" class="block w-[400px] m-auto normal-case relative">
@@ -723,12 +733,12 @@
 														</button>
 
 														<!-- автоматическая отправка формы -->
-														<!-- <script>
-															document.getElementById('photo_<?=$row['photos']?>').addEventListener('change', function() {
-																var form = document.getElementById('form_<?=$row['photos']?>');
-																form.submit();
-															});
-														</script> -->
+															<!-- <script>
+																document.getElementById('photo_<?=$row['photos']?>').addEventListener('change', function() {
+																	var form = document.getElementById('form_<?=$row['photos']?>');
+																	form.submit();
+																});
+															</script> -->
 
 													</form>
 												</div>
