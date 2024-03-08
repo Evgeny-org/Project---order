@@ -81,19 +81,342 @@
 							                });
 	            							</script>
 
-											<div class=""><?php
-												if ($row['state'] == 'Не подтверждён') {
-													echo '<p class="text-[#FF0000]">' . $row['state'] . '</p>';
-												} elseif ($row['state'] == 'Подтверждён'){
-													echo '<p class="text-[#FF5C00]">' . $row['state'] . '</p>';
-												} elseif ($row['state'] == 'Куплен'){
-													echo '<p class="text-[#FFB800]">' . $row['state'] . '</p>';
-												} elseif ($row['state'] == 'Отправлен'){
-													echo '<p class="text-[#00FF1A]">' . $row['state'] . '</p>';
-												} elseif ($row['state'] == 'Получен'){
-													echo '<p class="text-[#8FFF00]">' . $row['state'] . '</p>';
-												}
-											?></div>
+	            						<!-- Статус заказа -->
+												<div class="mr-20"><?php
+													if ($row['state'] == 'Не подтверждён') {
+														echo '<p class="text-[#FF0000]">' . $row['state'] . '</p>';
+													} elseif ($row['state'] == 'Подтверждён'){
+														echo '<p class="text-[#FF5C00]">' . $row['state'] . '</p>';
+													} elseif ($row['state'] == 'Куплен'){
+														echo '<p class="text-[#FFB800]">' . $row['state'] . '</p>';
+													} elseif ($row['state'] == 'Отправлен'){
+														echo '<p class="text-[#00FF1A]">' . $row['state'] . '</p>';
+													} elseif ($row['state'] == 'Получен'){
+														echo '<p class="text-[#8FFF00]">' . $row['state'] . '</p>';
+													}
+												?></div>
+
+											<!-- Действия с фото -->
+													<?php
+														$photo = mysqli_query($connect, "SELECT `photos`.`id` AS `id`, `one`, `two`, `three`, `four`, `five`, `six`, `seven`, `eight`, `nine`, `ten` FROM `orders` JOIN `photos` ON `orders`.`photos` = `photos`.`id` WHERE `photos`.`id` = '".$row["photos"]."'");
+														$photo_col = mysqli_fetch_assoc($photo);
+														// print_r($photo_col);
+													?>
+
+													<button onclick="showDialog_<?=$row['photos']?>()" class="mr-10 flex">
+														<div class="w-10 h-10 bg-[#e5e7eb] mr-4 relative">
+															<img class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['one']?>" alt="">
+														</div>
+														<div class="w-10 h-10 bg-[#e5e7eb] mr-4 relative">
+															<img class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['two']?>" alt="">
+														</div>
+														<div class="w-10 h-10 bg-[#e5e7eb] mr-4 relative">
+															<img class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['three']?>" alt="">
+														</div>
+														<div class="w-10 h-10 bg-[#e5e7eb] mr-4 relative">
+															<img class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['four']?>" alt="">
+														</div>
+														<div class="w-10 h-10 bg-[#e5e7eb] relative">
+															<img class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['five']?>" alt="">
+														</div>
+													</button>
+
+													<div onclick="hideDialog_<?=$row['photos']?>()" id="dialog_<?=$row['photos']?>" class="w-screen h-screen fixed left-0 top-0 z-10 bg-black bg-opacity-50 flex justify-center items-center transition-opacity duration-300 opacity-0 hidden">
+														<div onclick="event.stopImmediatePropagation()" class="relative w-5/6 h-4/5 bg-white p-10 shadow-closeDialog">
+
+															<!-- Кнопка "Закрыть" -->
+															<button onclick="hideDialog_<?=$row['photos']?>()" class="w-12 h-12 absolute top-[-75px] right-[-100px] focus:outline-0 ">
+																<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] translate-y-[-50%] rotate-45 z-10"></div>
+																<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] translate-y-[-50%] -rotate-45"></div>
+															</button>
+															<!-- ------- -->
+
+															<!-- Форма "Фото"" -->
+															<div class="w-full h-full">
+																<form id="form_<?=$row['photos']?>" class="w-full h-full flex flex-col text-black" action="./PHP_vendor/change_photo.php" method="post" enctype="multipart/form-data">
+																	<input type="hidden" name="photo_id" value="<?=$row['photos']?>">
+																	<!-- <p><?=$row['photos']?></p> -->
+
+																	<div class="flex justify-between w-full h-full mb-5">
+																		<!-- Фото №1 -->
+																			<div class="w-[19%] bg-[#D9D9D9] relative">
+																				<label for="photo_<?=$row['photos']?>" class="w-full h-full absolute top-0 left-0 avatarOut">
+																					<div class="w-full h-full absolute top-0 left-0">
+																						<img id="img_<?=$row['photos']?>" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['one']?>" alt="">
+																					</div>
+																				</label>
+																				<input id="photo_<?=$row['photos']?>" class="invisible">
+																			</div>
+
+																			<script>
+																				// даёт src фото, то есть путь к файлу, который выбрается в окне выбора изображения
+																				window.addEventListener('load', function() {
+																				  document.querySelector('input#photo_<?=$row['photos']?>').addEventListener('change', function() {
+																				      if (this.files && this.files[0]) {
+																				          var img = document.querySelector('img#img_<?=$row['photos']?>');
+																				          img.onload = () => {
+																				              URL.revokeObjectURL(img.src);  // no longer needed, free memory
+																				          }
+																				          img.src = URL.createObjectURL(this.files[0]); // set src to blob url
+																				          // true input для того, чтобы типа есть фото
+																				      }
+																				  });
+																				});
+																			</script>
+
+																		<!-- Фото №2 -->
+																			<div class="w-[19%] bg-[#D9D9D9] relative">
+																				<label for="photo_<?=$row['photos']?>1" class="w-full h-full absolute top-0 left-0 avatarOut">
+																					<div class="w-full h-full absolute top-0 left-0">
+																						<img id="img_<?=$row['photos']?>1" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['two']?>" alt="">
+																					</div>
+																				</label>
+																				<input id="photo_<?=$row['photos']?>1" class="invisible"> 
+																			</div>
+
+																			<script>
+																				window.addEventListener('load', function() {
+																				  document.querySelector('input#photo_<?=$row['photos']?>1').addEventListener('change', function() {
+																				      if (this.files && this.files[0]) {
+																				          var img = document.querySelector('img#img_<?=$row['photos']?>1');
+																				          img.onload = () => {
+																				              URL.revokeObjectURL(img.src);  // no longer needed, free memory
+																				          }
+																				          img.src = URL.createObjectURL(this.files[0]); // set src to blob url
+																				      }
+																				  });
+																				});
+																			</script>
+
+																		<!-- Фото №3 -->
+																			<div class="w-[19%] bg-[#D9D9D9] relative">
+																				<label for="photo_<?=$row['photos']?>2" class="w-full h-full absolute top-0 left-0 avatarOut">
+																					<div class="w-full h-full absolute top-0 left-0">
+																						<img id="img_<?=$row['photos']?>2" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['three']?>" alt="">
+																					</div>
+																				</label>
+																				<input id="photo_<?=$row['photos']?>2" class="invisible"> 
+																			</div>
+
+																			<script>
+																				window.addEventListener('load', function() {
+																				  document.querySelector('input#photo_<?=$row['photos']?>2').addEventListener('change', function() {
+																				      if (this.files && this.files[0]) {
+																				          var img = document.querySelector('img#img_<?=$row['photos']?>2');
+																				          img.onload = () => {
+																				              URL.revokeObjectURL(img.src);  // no longer needed, free memory
+																				          }
+																				          img.src = URL.createObjectURL(this.files[0]); // set src to blob url
+																				      }
+																				  });
+																				});
+																			</script>
+
+																		<!-- Фото №4 -->
+																			<div class="w-[19%] bg-[#D9D9D9] relative">
+																				<label for="photo_<?=$row['photos']?>3" class="w-full h-full absolute top-0 left-0 avatarOut">
+																					<div class="w-full h-full absolute top-0">
+																						<img id="img_<?=$row['photos']?>3" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['four']?>" alt="">
+																					</div>
+																				</label>
+																				<input id="photo_<?=$row['photos']?>3" class="invisible"> 
+																			</div>
+
+																			<script>
+																				window.addEventListener('load', function() {
+																				  document.querySelector('input#photo_<?=$row['photos']?>3').addEventListener('change', function() {
+																				      if (this.files && this.files[0]) {
+																				          var img = document.querySelector('img#img_<?=$row['photos']?>3');
+																				          img.onload = () => {
+																				              URL.revokeObjectURL(img.src);  // no longer needed, free memory
+																				          }
+																				          img.src = URL.createObjectURL(this.files[0]); // set src to blob url
+																				      }
+																				  });
+																				});
+																			</script>
+
+																		<!-- Фото №5 -->
+																			<div class="w-[19%] bg-[#D9D9D9] relative">
+																				<label for="photo_<?=$row['photos']?>4" class="w-full h-full absolute top-0 left-0 avatarOut">
+																					<div class="w-full h-full absolute top-0 left-0">
+																						<img id="img_<?=$row['photos']?>4" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['five']?>" alt="">
+																					</div>
+																				</label>
+																				<input id="photo_<?=$row['photos']?>4" class="invisible"> 
+																			</div>
+
+																			<script>
+																				window.addEventListener('load', function() {
+																				  document.querySelector('input#photo_<?=$row['photos']?>4').addEventListener('change', function() {
+																				      if (this.files && this.files[0]) {
+																				          var img = document.querySelector('img#img_<?=$row['photos']?>4');
+																				          img.onload = () => {
+																				              URL.revokeObjectURL(img.src);  // no longer needed, free memory
+																				          }
+																				          img.src = URL.createObjectURL(this.files[0]); // set src to blob url
+																				      }
+																				  });
+																				});
+																			</script>
+																	</div>
+
+																	<div class="flex justify-between w-full h-full">
+																		<!-- Фото №6 -->
+																			 <div class="w-[19%] bg-[#D9D9D9] relative">
+																				<label for="photo_<?=$row['photos']?>5" class="w-full h-full absolute top-0 left-0 avatarOut">
+																					<div class="w-full h-full absolute top-0 left-0">
+																						<img id="img_<?=$row['photos']?>5" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['six']?>" alt="">
+																					</div>
+																				</label>
+																				<input id="photo_<?=$row['photos']?>5" class="invisible"> 
+																			</div>
+
+																			<script>
+																				window.addEventListener('load', function() {
+																				  document.querySelector('input#photo_<?=$row['photos']?>5').addEventListener('change', function() {
+																				      if (this.files && this.files[0]) {
+																				          var img = document.querySelector('img#img_<?=$row['photos']?>5');
+																				          img.onload = () => {
+																				              URL.revokeObjectURL(img.src);  // no longer needed, free memory
+																				          }
+																				          img.src = URL.createObjectURL(this.files[0]); // set src to blob url
+																				      }
+																				  });
+																				});
+																			</script>
+
+																		<!-- Фото №7 -->
+																			<div class="w-[19%] bg-[#D9D9D9] relative">
+																				<label for="photo_<?=$row['photos']?>6" class="w-full h-full absolute top-0 left-0 avatarOut">
+																					<div class="w-full h-full absolute top-0 left-0">
+																						<img id="img_<?=$row['photos']?>6" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['seven']?>" alt="">
+																					</div>
+																				</label>
+																				<input id="photo_<?=$row['photos']?>6" class="invisible"> 
+																			</div>
+
+																			<script>
+																				window.addEventListener('load', function() {
+																				  document.querySelector('input#photo_<?=$row['photos']?>6').addEventListener('change', function() {
+																				      if (this.files && this.files[0]) {
+																				          var img = document.querySelector('img#img_<?=$row['photos']?>6');
+																				          img.onload = () => {
+																				              URL.revokeObjectURL(img.src);  // no longer needed, free memory
+																				          }
+																				          img.src = URL.createObjectURL(this.files[0]); // set src to blob url
+																				      }
+																				  });
+																				});
+																			</script>
+
+																		<!-- Фото №8 -->
+																			<div class="w-[19%] bg-[#D9D9D9] relative">
+																				<label for="photo_<?=$row['photos']?>7" class="w-full h-full absolute top-0 left-0 avatarOut">
+																					<div class="w-full h-full absolute top-0 left-0">
+																						<img id="img_<?=$row['photos']?>7" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['eight']?>" alt="">
+																					</div>
+																				</label>
+																				<input id="photo_<?=$row['photos']?>7" class="invisible"> 
+																			</div>
+
+																			<script>
+																				window.addEventListener('load', function() {
+																				  document.querySelector('input#photo_<?=$row['photos']?>7').addEventListener('change', function() {
+																				      if (this.files && this.files[0]) {
+																				          var img = document.querySelector('img#img_<?=$row['photos']?>7');
+																				          img.onload = () => {
+																				              URL.revokeObjectURL(img.src);  // no longer needed, free memory
+																				          }
+																				          img.src = URL.createObjectURL(this.files[0]); // set src to blob url
+																				      }
+																				  });
+																				});
+																			</script>
+
+																		<!-- Фото №9 -->
+																			<div class="w-[19%] bg-[#D9D9D9] relative">
+																				<label for="photo_<?=$row['photos']?>8" class="w-full h-full absolute top-0 left-0 avatarOut">
+																					<div class="w-full h-full absolute top-0 left-0">
+																						<img id="img_<?=$row['photos']?>8" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['nine']?>" alt="">
+																					</div>
+																				</label>
+																				<input id="photo_<?=$row['photos']?>8" class="invisible"> 
+																			</div>
+
+																			<script>
+																				window.addEventListener('load', function() {
+																				  document.querySelector('input#photo_<?=$row['photos']?>8').addEventListener('change', function() {
+																				      if (this.files && this.files[0]) {
+																				          var img = document.querySelector('img#img_<?=$row['photos']?>8');
+																				          img.onload = () => {
+																				              URL.revokeObjectURL(img.src);  // no longer needed, free memory
+																				          }
+																				          img.src = URL.createObjectURL(this.files[0]); // set src to blob url
+																				      }
+																				  });
+																				});
+																			</script>
+
+																		<!-- Фото №10 -->
+																			<div class="w-[19%] bg-[#D9D9D9] relative">
+																				<label for="photo_<?=$row['photos']?>9" class="w-full h-full absolute top-0 left-0 avatarOut">
+																					<div class="w-full h-full absolute top-0 left-0">
+																						<img id="img_<?=$row['photos']?>9" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['ten']?>" alt="">
+																					</div>
+																				</label>
+																				<input id="photo_<?=$row['photos']?>9" class="invisible"> 
+																			</div>
+
+																			<script>
+																				window.addEventListener('load', function() {
+																				  document.querySelector('input#photo_<?=$row['photos']?>9').addEventListener('change', function() {
+																				      if (this.files && this.files[0]) {
+																				          var img = document.querySelector('img#img_<?=$row['photos']?>9');
+																				          img.onload = () => {
+																				              URL.revokeObjectURL(img.src);  // no longer needed, free memory
+																				          }
+																				          img.src = URL.createObjectURL(this.files[0]); // set src to blob url
+																				      }
+																				  });
+																				});
+																			</script>
+																	</div>
+
+																	<!-- автоматическая отправка формы -->
+																		<!-- <script>
+																			document.getElementById('photo_<?=$row['photos']?>').addEventListener('change', function() {
+																				var form = document.getElementById('form_<?=$row['photos']?>');
+																				form.submit();
+																			});
+																		</script> -->
+
+																</form>
+															</div>
+															<!-- ------- -->
+														</div>
+													</div>
+
+											<script>
+												// Модальное окно фото
+													function showDialog_<?=$row['photos']?>(){
+														let dialog = document.getElementById('dialog_<?=$row['photos']?>');
+														dialog.classList.remove('hidden');
+														dialog.classList.add('flex');
+														setTimeout(()=>{
+															dialog.classList.add("opacity-100");
+														}, 1)
+													};
+													function hideDialog_<?=$row['photos']?>(){
+														let dialog = document.getElementById('dialog_<?=$row['photos']?>');
+														dialog.classList.add("opacity-0");
+														dialog.classList.remove("opacity-100");
+														setTimeout(()=>{
+															dialog.classList.add('hidden');
+															dialog.classList.remove('flex');
+														}, 300)
+													}
+											</script>
 										</div>
 										<hr class="border-black">
 									<?php
@@ -119,38 +442,38 @@
 						</form>
 
 						<!-- Чудо скрипт от юшки, который активирует куки файлы и при достижени лимита - блокирует нажатия :) -->
-					<!-- 	<script>
-						    var button = document.getElementById('myButton');
-						    var clickCount = getCookie('clickCount');
+							<script>
+							    var button = document.getElementById('myButton');
+							    var clickCount = getCookie('clickCount');
 
-						    if (clickCount >= 4) {
-						        button.disabled = true;
-						    }
+							    if (clickCount >= 4) {
+							        button.disabled = true;
+							    }
 
-						    button.addEventListener('click', function() {
-						        clickCount++;
-						        if (clickCount >= 4) {
-						            button.disabled = true;
-						        }
-						        setCookie('clickCount', clickCount);
-						    });
+							    button.addEventListener('click', function() {
+							        clickCount++;
+							        if (clickCount >= 4) {
+							            button.disabled = true;
+							        }
+							        setCookie('clickCount', clickCount);
+							    });
 
-						    function setCookie(name, value) {
-						        document.cookie = name + '=' + value + '; path=/';
-						    }
+							    function setCookie(name, value) {
+							        document.cookie = name + '=' + value + '; path=/';
+							    }
 
-						    function getCookie(name) {
-						        var cookieName = name + '=';
-						        var cookies = document.cookie.split(';');
-						        for (var i = 0; i < cookies.length; i++) {
-						            var cookie = cookies[i].trim();
-						            if (cookie.indexOf(cookieName) === 0) {
-						                return parseInt(cookie.substring(cookieName.length), 10);
-						            }
-						        }
-						        return 0;
-						    }
-						</script> -->
+							    function getCookie(name) {
+							        var cookieName = name + '=';
+							        var cookies = document.cookie.split(';');
+							        for (var i = 0; i < cookies.length; i++) {
+							            var cookie = cookies[i].trim();
+							            if (cookie.indexOf(cookieName) === 0) {
+							                return parseInt(cookie.substring(cookieName.length), 10);
+							            }
+							        }
+							        return 0;
+							    }
+							</script>
 						<script>
 							let cords = ['scrollX','scrollY']; 
 							// сохраняем позицию скролла в localStorage
@@ -190,8 +513,6 @@
 	</div>
 </footer>
 	</div>
-
-
 
 </body>
 </html>
