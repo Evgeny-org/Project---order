@@ -30,10 +30,10 @@
 						<div class="flex flex-col justify-between mr-[50px]">
 
 							<div class="w-[400px] h-[500px] bg-[#D9D9D9] mb-[25px] relative">
-								<?php if ($_SESSION['user']['avatar'] !== '') { ?>
+								<?php if ($_SESSION['user']['avatar'] !== '' && $_SESSION['user']['avatar'] !== NULL) { ?>
 									<img class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?= $_SESSION['user']['avatar'] ?>" alt="">
-								<?php } elseif ($_SESSION['user']['avatar'] == '') { ?>
-									<img class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="./img/Mask_group.png" alt="">
+								<?php } elseif ($_SESSION['user']['avatar'] == '' || $_SESSION['user']['avatar'] == NULL) { ?>
+									<img class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="./img/Screenshot_24.png" alt="">
 								<?php } ?>
 							</div>
 

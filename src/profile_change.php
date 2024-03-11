@@ -19,6 +19,7 @@
 	<link href="./output.css" rel="stylesheet">
 </head>
 <body class="h-full font-TNRR">
+	<span id="big-photo"></span>
 	<div class="min-h-full flex flex-col">
 
 		<header class="w-screen h-[75px] bg-[#D9D9D9] mb-[100px] px-10">
@@ -30,41 +31,39 @@
 				</div>
 			</div>
 		</header>
-
-		<main class="flex-auto px-10 tracking-widest mb-[125px]">
-			<span id="big-photo"></span>
+		<main class="flex-auto px-10 tracking-widest mb-[125px] relative">
 				<div class="max-w-[1920px] mx-auto">
 					<form class="w-[80%] mx-auto flex" action="./PHP_vendor/change_profile.php" method="post" enctype="multipart/form-data">
 						<div class="flex flex-col justify-between mr-[50px]">
 
 							<!-- Аватар -->
-							<div class="photoOut w-[400px] h-[500px] bg-[#D9D9D9] mb-[25px] relative">
-								<?php if ($_SESSION['user']['avatar'] !== '') { ?>
+							<div class="photoOut w-[400px] h-[500px] bg-[#D9D9D9] mb-[25px] relative"> 
+								<?php if ($_SESSION['user']['avatar'] !== '' && $_SESSION['user']['avatar'] !== NULL) { ?>
 
 									<div onclick="open_photo('<?= $_SESSION['user']['avatar'] ?>')" class="photoYes absolute top-0 left-0 w-full h-full bg-[rgba(0,0,0,.5)] z-10 cursor-pointer"></div>
 
 								<?php } ?>
 								<label class="w-full h-full absolute top-0 left-0 avatarOut" for="avatar">
 									<div class="w-full h-full absolute top-0 left-0">
-									<?php if ($_SESSION['user']['avatar'] !== '') { ?>
+									<?php if ($_SESSION['user']['avatar'] !== '' && $_SESSION['user']['avatar'] !== NULL) { ?>
 
-										<img id="img" class="photo w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?= $_SESSION['user']['avatar'] ?>" alt="">
+										<img id="img" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?= $_SESSION['user']['avatar'] ?>" alt="">
 
-									<?php } elseif ($_SESSION['user']['avatar'] == '') { ?>
-										<img id="img" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="./img/Mask_group.png" alt="">
+									<?php } elseif ($_SESSION['user']['avatar'] == '' || $_SESSION['user']['avatar'] == NULL) { ?>
+										<img id="img" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="./img/Screenshot_24.png" alt="">
 									<?php } ?>
 									</div>
-									<?php if ($_SESSION['user']['avatar'] == '') { ?>
-									<svg xmlns="http://www.w3.org/2000/svg" class="">
+									<?php if ($_SESSION['user']['avatar'] == '' || $_SESSION['user']['avatar'] == NULL) { ?>
+									<svg xmlns="http://www.w3.org/2000/svg" class="relative z-10">
 										<rect class="shape"/>
 									<img class="absolute z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] avatarIn" src="./img/free-icon-plus-3398952.png" alt="Фото профиля">
 								</label>
 								<input id="avatar" class="invisible" type="file" accept="image/*" name="avatar">
-								<?php } elseif ($_SESSION['user']['avatar'] !== '') { ?>
+								<?php } elseif ($_SESSION['user']['avatar'] !== '' && $_SESSION['user']['avatar'] !== NULL) { ?>
 									<img class="absolute z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] photoYes pointer-events-none" src="./img/Mask_group.png" alt="">
 								<?php } ?>
 								<input type="hidden" class="delPhoto" name="delPhoto" value="true">
-								<?php if ($_SESSION['user']['avatar'] !== '') { ?>
+								<?php if ($_SESSION['user']['avatar'] !== '' && $_SESSION['user']['avatar'] !== NULL) { ?>
 									<!-- Удалить фото -->
 									<button type="button" class="w-12 h-12 absolute top-2 right-2 focus:outline-0 photoYes z-10 cursor-pointer" onclick="deletePhoto()">
 										<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] rotate-45"></div>
@@ -74,14 +73,18 @@
 
 
 								<script>
-									function open_photo(photo) {
-									  document.getElementById("big-photo").innerHTML =
-									    ("<img onclick='close_photo()' style='position: absolute; height: 80vh; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 11; cursor: pointer;' src='" + photo + "'>");
-									}
+									  function open_photo(photo) {
+									    document.getElementById("big-photo").innerHTML =
+									      (
+									        "<div onclick='close_photo()' style='position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,.5); z-index: 12; cursor: pointer;'>" +
+									          "<img style='position: absolute; height: 80vh; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 11;' src='" + photo + "'>" +
+									        "</div>"
+									      );
+									  }
 
-									function close_photo() {
-									  document.getElementById("big-photo").innerHTML = "";
-									}
+									  function close_photo() {
+									    document.getElementById("big-photo").innerHTML = "";
+									  }
 									</script>
 
 								<script type="text/javascript">
@@ -167,8 +170,7 @@
 		</div>
 	</div>
 	</div>
-</footer>
-	</div>
+</footer>	</div>
 
 	
 </body>

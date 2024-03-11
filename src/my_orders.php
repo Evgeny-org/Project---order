@@ -154,7 +154,7 @@
 																						<?php if ($photo_col['one'] !== '' && $photo_col['one'] !== NULL) { ?>
 																							<img id="img_<?=$row['photos']?>" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['one']?>" alt="">
 																						<?php } elseif ($photo_col['one'] == '' || $photo_col['one'] == NULL) { ?>
-																							<img id="img_<?=$row['photos']?>" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="./img/Mask_group.png" alt="">
+																							<img id="img_<?=$row['photos']?>" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="./img/Screenshot_24.png" alt="">
 																						<?php } ?>
 																					</div>
 																				</label>
@@ -192,7 +192,7 @@
 																						<?php if ($photo_col['two'] !== '' && $photo_col['two'] !== NULL) { ?>
 																							<img id="img_<?=$row['photos']?>1" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['two']?>" alt="">
 																						<?php } elseif ($photo_col['two'] == '' || $photo_col['two'] == NULL) { ?>
-																							<img id="img_<?=$row['photos']?>1" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="./img/Mask_group.png" alt="">
+																							<img id="img_<?=$row['photos']?>1" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="./img/Screenshot_24.png" alt="">
 																						<?php } ?>
 																					</div>
 																				</label>
@@ -226,7 +226,7 @@
 																						<?php if ($photo_col['three'] !== '' && $photo_col['three'] !== NULL) { ?>
 																							<img id="img_<?=$row['photos']?>2" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['three']?>" alt="">
 																						<?php } elseif ($photo_col['three'] == '' || $photo_col['three'] == NULL) { ?>
-																							<img id="img_<?=$row['photos']?>2" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="./img/Mask_group.png" alt="">
+																							<img id="img_<?=$row['photos']?>2" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="./img/Screenshot_24.png" alt="">
 																						<?php } ?>
 																					</div>
 																				</label>
@@ -260,7 +260,7 @@
 																						<?php if ($photo_col['four'] !== '' && $photo_col['four'] !== NULL) { ?>
 																							<img id="img_<?=$row['photos']?>3" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['four']?>" alt="">
 																						<?php } elseif ($photo_col['four'] == '' || $photo_col['four'] == NULL) { ?>
-																							<img id="img_<?=$row['photos']?>3" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="./img/Mask_group.png" alt="">
+																							<img id="img_<?=$row['photos']?>3" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="./img/Screenshot_24.png" alt="">
 																						<?php } ?>
 																					</div>
 																				</label>
@@ -294,7 +294,7 @@
 																						<?php if ($photo_col['five'] !== '' && $photo_col['five'] !== NULL) { ?>
 																							<img id="img_<?=$row['photos']?>4" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['five']?>" alt="">
 																						<?php } elseif ($photo_col['five'] == '' || $photo_col['five'] == NULL) { ?>
-																							<img id="img_<?=$row['photos']?>4" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="./img/Mask_group.png" alt="">
+																							<img id="img_<?=$row['photos']?>4" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="./img/Screenshot_24.png" alt="">
 																						<?php } ?>
 																					</div>
 																				</label>
@@ -330,7 +330,7 @@
 																						<?php if ($photo_col['six'] !== '' && $photo_col['six'] !== NULL) { ?>
 																							<img id="img_<?=$row['photos']?>5" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['six']?>" alt="">
 																						<?php } elseif ($photo_col['six'] == '' || $photo_col['six'] == NULL) { ?>
-																							<img id="img_<?=$row['photos']?>5" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="./img/Mask_group.png" alt="">
+																							<img id="img_<?=$row['photos']?>5" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="./img/Screenshot_24.png" alt="">
 																						<?php } ?>
 																					</div>
 																				</label>
@@ -364,7 +364,7 @@
 																						<?php if ($photo_col['seven'] !== '' && $photo_col['seven'] !== NULL) { ?>
 																							<img id="img_<?=$row['photos']?>6" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['seven']?>" alt="">
 																						<?php } elseif ($photo_col['seven'] == '' || $photo_col['seven'] == NULL) { ?>
-																							<img id="img_<?=$row['photos']?>6" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="./img/Mask_group.png" alt="">
+																							<img id="img_<?=$row['photos']?>6" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="./img/Screenshot_24.png" alt="">
 																						<?php } ?>
 																					</div>
 																				</label>
@@ -398,7 +398,7 @@
 																						<?php if ($photo_col['eight'] !== '' && $photo_col['eight'] !== NULL) { ?>
 																							<img id="img_<?=$row['photos']?>7" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['eight']?>" alt="">
 																						<?php } elseif ($photo_col['eight'] == '' || $photo_col['eight'] == NULL) { ?>
-																							<img id="img_<?=$row['photos']?>7" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="./img/Mask_group.png" alt="">
+																							<img id="img_<?=$row['photos']?>7" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="./img/Screenshot_24.png" alt="">
 																						<?php } ?>
 																					</div>
 																				</label>
@@ -432,7 +432,7 @@
 																						<?php if ($photo_col['nine'] !== '' && $photo_col['nine'] !== NULL) { ?>
 																							<img id="img_<?=$row['photos']?>8" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['nine']?>" alt="">
 																						<?php } elseif ($photo_col['nine'] == '' || $photo_col['nine'] == NULL) { ?>
-																							<img id="img_<?=$row['photos']?>8" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="./img/Mask_group.png" alt="">
+																							<img id="img_<?=$row['photos']?>8" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="./img/Screenshot_24.png" alt="">
 																						<?php } ?>
 																					</div>
 																				</label>
@@ -466,7 +466,7 @@
 																						<?php if ($photo_col['ten'] !== '' && $photo_col['ten'] !== NULL) { ?>
 																							<img id="img_<?=$row['photos']?>9" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['ten']?>" alt="">
 																						<?php } elseif ($photo_col['ten'] == '' || $photo_col['ten'] == NULL) { ?>
-																							<img id="img_<?=$row['photos']?>9" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="./img/Mask_group.png" alt="">
+																							<img id="img_<?=$row['photos']?>9" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="./img/Screenshot_24.png" alt="">
 																						<?php } ?>
 																					</div>
 																				</label>
@@ -550,14 +550,18 @@
 						</form>
 
 						<script>
-							function open_photo(photo) {
-							  document.getElementById("big-photo").innerHTML =
-							    ("<img onclick='close_photo()' style='position: absolute; height: 80vh; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 11; cursor: pointer;' src='" + photo + "'>");
-							}
+						  function open_photo(photo) {
+						    document.getElementById("big-photo").innerHTML =
+						      (
+						        "<div onclick='close_photo()' style='position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,.5); z-index: 12; cursor: pointer;'>" +
+						          "<img style='position: absolute; height: 80vh; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 11;' src='" + photo + "'>" +
+						        "</div>"
+						      );
+						  }
 
-							function close_photo() {
-							  document.getElementById("big-photo").innerHTML = "";
-							}
+						  function close_photo() {
+						    document.getElementById("big-photo").innerHTML = "";
+						  }
 						</script>
 
 						<!-- Чудо скрипт от юшки, который активирует куки файлы и при достижени лимита - блокирует нажатия :) -->

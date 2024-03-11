@@ -17,37 +17,37 @@
 
 								<!-- Форма "Регистрация"" -->
 								<div>
-									<form class="flex flex-col text-black" action="./PHP_vendor/signup.php" method="post">
+									<form class="flex flex-col text-black tracking-widest" action="./PHP_vendor/signup.php" method="post">
 										<h2 class="text-center ">Регистрация</h2>
 
 										<div class="flex items-center mb-3">
-											<p class="text-2xl m-0">Логин*</p>
-											<input class="w-full outline-none border-b-[1px] border-black px-2 pt-2 text-right" type="text" name="login">
+										    <p class="text-2xl m-0">Логин*</p>
+										    <input class="w-full outline-none border-b-[1px] border-black px-2 pt-2 text-right tracking-widest" type="text" name="login" required>
 										</div>
 
 										<div class="flex items-center mb-3">
-											<p class="text-2xl m-0">Пароль*</p>
-											<input class="w-full outline-none border-b-[1px] border-black px-2 pt-2 text-right" type="password" name="password">
+										    <p class="text-2xl m-0">Пароль*</p>
+										    <input class="w-full outline-none border-b-[1px] border-black px-2 pt-2 text-right tracking-widest" type="password" name="password" required>
 										</div>
 
 										<div class="flex items-center mb-3">
-											<p class="text-2xl m-0">Telegram*</p>
-											<input class="w-full outline-none border-b-[1px] border-black px-2 pt-2 text-right" type="text" name="telegram">
+										    <p class="text-2xl m-0">Telegram*</p>
+										    <input class="w-full outline-none border-b-[1px] border-black px-2 pt-2 text-right tracking-widest" type="text" name="telegram" required>
 										</div>
 
 										<div class="flex items-center mb-3">
 											<p class="text-2xl m-0">ФИО</p>
-											<input class="w-full outline-none border-b-[1px] border-black px-2 pt-2 text-right" type="text" name="full_name">
+											<input class="w-full outline-none border-b-[1px] border-black px-2 pt-2 text-right tracking-widest" type="text" name="full_name">
 										</div>
 
 										<div class="flex items-center mb-3">
 											<p class="text-2xl m-0">Телефон</p>
-											<input class="w-full outline-none border-b-[1px] border-black px-2 pt-2 text-right" type="text" name="telephone"s>
+											<input class="w-full outline-none border-b-[1px] border-black px-2 pt-2 text-right tracking-widest" type="text" name="telephone"s>
 										</div>
 
 										<div class="flex items-center mb-[40px]">
 											<p class="text-2xl m-0">vK</p>
-											<input class="w-full outline-none border-b-[1px] border-black px-2 pt-2 text-right" type="text" name="vk">
+											<input class="w-full outline-none border-b-[1px] border-black px-2 pt-2 text-right tracking-widest" type="text" name="vk">
 										</div>
 										<div class="relative w-full">
 											<button type="submit" class="block relative z-10 w-8/12 mx-auto font-TNRB text-2xl text-white tracking-[.20em] py-3 bg-black hover:translate-x-[-15px] hover:translate-y-[-15px] duration-300 focus:outline-0">Зарегистрироваться</button>
@@ -82,11 +82,11 @@
 										<h2 class="text-center ">Авторизация</h2>
 										<div class="flex items-center mb-3">
 											<p class="text-2xl m-0">Логин</p>
-											<input class="w-full outline-none border-b-[1px] border-black px-2 pt-2 text-right" type="text" name="login">
+											<input class="w-full outline-none border-b-[1px] border-black px-2 pt-2 text-right tracking-widest" type="text" name="login">
 										</div>
 										<div class="flex items-center mb-[40px]">
 											<p class="text-2xl m-0">Пароль</p>
-											<input class="w-full outline-none border-b-[1px] border-black px-2 pt-2 text-right" type="password" name="password">
+											<input class="w-full outline-none border-b-[1px] border-black px-2 pt-2 text-right tracking-widest" type="password" name="password">
 										</div>
 										<div class="relative w-full">
 											<button type="submit" class="block relative z-10 w-8/12 mx-auto font-TNRB text-2xl text-white tracking-[.20em] py-3 bg-black hover:translate-x-[-15px] hover:translate-y-[-15px] duration-300 focus:outline-0">Войти</button>
@@ -99,12 +99,19 @@
 														' . $_SESSION['messageAuth'] . '
 													</p>';
 												unset($_SESSION['messageAuth']);
-											} elseif ($_SESSION['messageReg']){
+											} elseif ($_SESSION['messageRegTrue']){
 												echo 
 													'<p class="text-center text-green-600 mt-3"">
-														' . $_SESSION['messageReg'] . '
+														' . $_SESSION['messageRegTrue'] . '
 													</p>';
-												unset($_SESSION['messageReg']);
+												unset($_SESSION['messageRegTrue']);
+											}
+											elseif ($_SESSION['messageRegFalse']){
+												echo 
+													'<p class="text-center text-red-600 mt-3"">
+														' . $_SESSION['messageRegFalse'] . '
+													</p>';
+												unset($_SESSION['messageRegFalse']);
 											}
 											
 										?>
