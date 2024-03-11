@@ -9,8 +9,20 @@
 
 	$id = $_SESSION['user']['id'];
 
-	$path = 'img/avatars/' . time() . $_FILES['avatar']['name'];
-	move_uploaded_file($_FILES['avatar']['tmp_name'], '../' . $path);
+	$photo = mysqli_query($connect, "SELECT `avatar` FROM `users` WHERE `users`.`id` = '$id'");
+	$photo_col = mysqli_fetch_assoc($photo);
+
+	$delPhoto = $_POST['delPhoto'];
+	if ($delPhoto == 'true') {
+		if (!empty($_FILES['avatar']['name'])) {
+		    $path = 'img/avatars/' . time() . $_FILES['avatar']['name'];
+		    move_uploaded_file($_FILES['avatar']['tmp_name'], '../' . $path);
+		} else {
+		    $path = $photo_col['avatar'];
+		}
+	} elseif ($delPhoto == 'false') {
+		 $path = '';
+	}
 
 	mysqli_query($connect, "UPDATE `users` SET `full_name` = '$full_name', `telephone` = '$telephone', `telegram` = '$telegram', `vk` = '$vk', `avatar` = '$path' WHERE `users`.`id` = '$id'");
 

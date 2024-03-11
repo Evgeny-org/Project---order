@@ -32,6 +32,50 @@
   opacity: 1;
 }
 
+.previewDown {
+  opacity: 0;
+  -webkit-transition: 0.1s;
+  transition: 0.1s;
+}
+
+.previewUp:hover .previewDown {
+  opacity: 1;
+}
+
+.imgOrderIn {
+  -webkit-transition: 0.25s;
+  transition: 0.25s;
+}
+
+.avatarOut:hover .imgOrderIn {
+  opacity: 0.5;
+}
+
+.deletePhoto {
+  opacity: 0;
+}
+
+.photoBgBlack {
+  opacity: 0;
+  -webkit-transition: 0.25s;
+  transition: 0.25s;
+}
+
+.photoOut:hover .photoBgBlack {
+  opacity: 1;
+}
+
+.photoYes {
+  opacity: 0;
+  cursor: auto;
+  -webkit-transition: 0.25s;
+  transition: 0.25s;
+}
+
+.photoOut:hover .photoYes {
+  opacity: 1;
+}
+
 svg {
   width: 100%;
   height: 100%;

@@ -254,21 +254,24 @@
 											// print_r($photo_col);
 										?>
 
-										<button onclick="showDialog_<?=$row['photos']?>()" class="mr-10 flex">
+										<button onclick="showDialog_<?=$row['photos']?>()" class="previewUp mr-10 flex relative">
 											<div class="w-10 h-10 bg-[#e5e7eb] mr-4 relative">
-												<img class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['one']?>" alt="">
+												<img class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['one']?>" alt="" onerror="this.style.visibility = 'hidden'">
 											</div>
 											<div class="w-10 h-10 bg-[#e5e7eb] mr-4 relative">
-												<img class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['two']?>" alt="">
+												<img class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['two']?>" alt="" onerror="this.style.visibility = 'hidden'">
 											</div>
 											<div class="w-10 h-10 bg-[#e5e7eb] mr-4 relative">
-												<img class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['three']?>" alt="">
+												<img class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['three']?>" alt="" onerror="this.style.visibility = 'hidden'">
 											</div>
 											<div class="w-10 h-10 bg-[#e5e7eb] mr-4 relative">
-												<img class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['four']?>" alt="">
+												<img class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['four']?>" alt="" onerror="this.style.visibility = 'hidden'">
 											</div>
 											<div class="w-10 h-10 bg-[#e5e7eb] relative">
-												<img class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['five']?>" alt="">
+												<img class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['five']?>" alt="" onerror="this.style.visibility = 'hidden'">
+											</div>
+											<div class="previewDown absolute top-0 left-0 w-full h-full bg-[rgba(0,0,0,.5)] flex justify-center items-center">
+												<p class="text-white tracking-widest opacity-100 text-2xl">Изменить</p>
 											</div>
 										</button>
 
@@ -286,36 +289,51 @@
 												<div class="w-full h-full">
 													<form id="form_<?=$row['photos']?>" class="w-full h-full flex flex-col text-black" action="./PHP_vendor/change_photo.php" method="post" enctype="multipart/form-data">
 														<input type="hidden" name="photo_id" value="<?=$row['photos']?>">
-														<!-- <p><?=$row['photos']?></p> -->
 
 														<div class="flex justify-between w-full h-full mb-5">
 
 															<!-- Фото №1 -->
-																<div class="w-[19%] bg-[#D9D9D9] relative">
+																<div class="photoOut w-[19%] bg-[#D9D9D9] relative">
+																	<?php if ($photo_col['one'] !== '' && $photo_col['one'] !== NULL) { ?>
+																		<div class="photoYes absolute top-0 left-0 w-full h-full bg-[rgba(0,0,0,.5)] z-10 cursor-pointer"></div>
+																	<?php } ?>
+
 																	<label for="photo_<?=$row['photos']?>" class="w-full h-full absolute top-0 left-0 avatarOut">
 
 																		<div class="w-full h-full absolute top-0 left-0">
-																			<img id="img_<?=$row['photos']?>" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] opacity-25" src="<?=$photo_col['one']?>" alt="">
+																			<?php if ($photo_col['one'] !== '' && $photo_col['one'] !== NULL) { ?>
+																				<img id="img_<?=$row['photos']?>" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['one']?>" alt="">
+																			<?php } elseif ($photo_col['one'] == '' || $photo_col['one'] == NULL) { ?>
+																				<img id="img_<?=$row['photos']?>" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="./img/Mask_group.png" alt="">
+																			<?php } ?>
 																		</div>
 
-																		<img class="absolute z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] photoIn" src="./img/free-icon-plus-3398952.png" alt="">
-																	</label>
-																	<input id="photo_<?=$row['photos']?>" class="invisible" type="file" accept="image/*" name="photo1">
+																		<?php if ($photo_col['one'] == '' || $photo_col['one'] == NULL) { ?>
+																			<img class="absolute z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] photoIn" src="./img/free-icon-plus-3398952.png" alt="">
+																			</label>
+																			<input id="photo_<?=$row['photos']?>" class="invisible" type="file" accept="image/*" name="photo1">
+
+																		<?php } elseif ($photo_col['one'] !== '' && $photo_col['one'] !== NULL) { ?>
+																			<img class="absolute z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] photoYes pointer-events-none" src="./img/Mask_group.png" alt="">
+																		<?php } ?>
 
 																	<input type="hidden" class="delPhoto_<?=$row['photos']?>" name="delPhoto_<?=$row['photos']?>" value="true">
 
-																	<!-- Удалить фото 1 -->
-																	<button type="button" class="w-12 h-12 absolute top-2 right-2 focus:outline-0" onclick="deletePhoto1(<?=$row['photos']?>)">
-																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] rotate-45 z-10"></div>
-																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] -rotate-45"></div>
-																	</button>
+																	<?php if ($photo_col['one'] !== '' && $photo_col['one'] !== NULL) { ?>
+																		<!-- Удалить фото 1 -->
+																		<button type="button" class="w-12 h-12 absolute top-2 right-2 focus:outline-0 photoYes z-10 cursor-pointer" onclick="deletePhoto1(<?=$row['photos']?>)">
+																			<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] rotate-45"></div>
+																			<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] -rotate-45"></div>
+																		</button>
+																	<?php } ?>
+
 																</div>
 
 																<script>
 																	// false input для того, чтобы типа нет фото
 																	function deletePhoto1(photoId) {
 																		var photoId_ = document.getElementById('img_' + photoId);
-																		photoId_.src = '';
+																		photoId_.src = './img/Screenshot_24.png';
 																		document.querySelector('.delPhoto_' + photoId).value = 'false';
 																	}
 
@@ -337,30 +355,45 @@
 																</script>
 
 															<!-- Фото №2 -->
-																<div class="w-[19%] bg-[#D9D9D9] relative">
+																<div class="photoOut w-[19%] bg-[#D9D9D9] relative">
+																	<?php if ($photo_col['two'] !== '' && $photo_col['two'] !== NULL) { ?>
+																		<div class="photoYes absolute top-0 left-0 w-full h-full bg-[rgba(0,0,0,.5)] z-10 cursor-pointer"></div>
+																	<?php } ?>
+
 																	<label for="photo_<?=$row['photos']?>1" class="w-full h-full absolute top-0 left-0 avatarOut">
 
-																		<div class="w-full h-full absolute top-0 left-0">
-																			<img id="img_<?=$row['photos']?>1" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] opacity-25" src="<?=$photo_col['two']?>" alt="">
-																		</div>
+																	<div class="w-full h-full absolute top-0 left-0">
+																		<?php if ($photo_col['two'] !== '' && $photo_col['two'] !== NULL) { ?>
+																			<img id="img_<?=$row['photos']?>1" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['two']?>" alt="">
+																		<?php } elseif ($photo_col['two'] == '' || $photo_col['two'] == NULL) { ?>
+																			<img id="img_<?=$row['photos']?>1" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="./img/Mask_group.png" alt="">
+																		<?php } ?>
+																	</div>
 
+																	<?php if ($photo_col['two'] == '' || $photo_col['two'] == NULL) { ?>
 																		<img class="absolute z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] photoIn" src="./img/free-icon-plus-3398952.png" alt="">
 																	</label>
 																	<input id="photo_<?=$row['photos']?>1" class="invisible" type="file" accept="image/*" name="photo2"> 
 
+																	<?php } elseif ($photo_col['two'] !== '' && $photo_col['two'] !== NULL) { ?>
+																		<img class="absolute z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] photoYes pointer-events-none" src="./img/Mask_group.png" alt="">
+																	<?php } ?>
+
 																	<input type="hidden" class="delPhoto_<?=$row['photos']?>1" name="delPhoto_<?=$row['photos']?>1" value="true">
 
+																	<?php if ($photo_col['two'] !== '' && $photo_col['two'] !== NULL) { ?>
 																	<!-- Удалить фото 1 -->
-																	<button type="button" class="w-12 h-12 absolute top-2 right-2 focus:outline-0" onclick="deletePhoto2(<?=$row['photos']?>1)">
+																	<button type="button" class="w-12 h-12 absolute top-2 right-2 focus:outline-0 photoYes z-10 cursor-pointer" onclick="deletePhoto2(<?=$row['photos']?>1)">
 																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] rotate-45 z-10"></div>
 																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] -rotate-45"></div>
 																	</button>
+																	<?php } ?>
 																</div>
 
 																<script>
 																	function deletePhoto2(photoId) {
 																		var photoId_ = document.getElementById('img_' + photoId);
-																		photoId_.src = '';
+																		photoId_.src = './img/Screenshot_24.png';
 																		document.querySelector('.delPhoto_' + photoId).value = 'false';
 																	}
 
@@ -380,30 +413,46 @@
 																</script>
 
 															<!-- Фото №3 -->
-																<div class="w-[19%] bg-[#D9D9D9] relative">
-																	<label for="photo_<?=$row['photos']?>2" class="w-full h-full absolute top-0 left-0 avatarOut">
+																<div class="photoOut w-[19%] bg-[#D9D9D9] relative">
+															    <?php if ($photo_col['three'] !== '' && $photo_col['three'] !== NULL) { ?>
+															        <div class="photoYes absolute top-0 left-0 w-full h-full bg-[rgba(0,0,0,.5)] z-10 cursor-pointer"></div>
+															    <?php } ?>
 
-																		<div class="w-full h-full absolute top-0 left-0">
-																			<img id="img_<?=$row['photos']?>2" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] opacity-25" src="<?=$photo_col['three']?>" alt="">
-																		</div>
+															    <label for="photo_<?=$row['photos']?>2" class="w-full h-full absolute top-0 left-0 avatarOut">
 
-																		<img class="absolute z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] photoIn" src="./img/free-icon-plus-3398952.png" alt="">
-																	</label>
-																	<input id="photo_<?=$row['photos']?>2" class="invisible" type="file" accept="image/*" name="photo3"> 
-																
-																	<input type="hidden" class="delPhoto_<?=$row['photos']?>2" name="delPhoto_<?=$row['photos']?>2" value="true">
+															    	<div class="w-full h-full absolute top-0 left-0">
+																		<?php if ($photo_col['three'] !== '' && $photo_col['three'] !== NULL) { ?>
+																			<img id="img_<?=$row['photos']?>2" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['three']?>" alt="">
+																		<?php } elseif ($photo_col['three'] == '' || $photo_col['three'] == NULL) { ?>
+																			<img id="img_<?=$row['photos']?>2" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="./img/Mask_group.png" alt="">
+																		<?php } ?>
+																	</div>
 
-																	<!-- Удалить фото 3 -->
-																	<button type="button" class="w-12 h-12 absolute top-2 right-2 focus:outline-0" onclick="deletePhoto2(<?=$row['photos']?>2)">
-																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] rotate-45 z-10"></div>
-																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] -rotate-45"></div>
-																	</button>
-																</div>
+															        <?php if ($photo_col['three'] == '' || $photo_col['three'] == NULL) { ?>
+															            <img class="absolute z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] photoIn" src="./img/free-icon-plus-3398952.png" alt="">
+															        </label>
+															        <input id="photo_<?=$row['photos']?>2" class="invisible" type="file" accept="image/*" name="photo3"> 
+
+															        <?php } elseif ($photo_col['three'] !== '' && $photo_col['three'] !== NULL) { ?>
+															            <img class="absolute z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] photoYes pointer-events-none" src="./img/Mask_group.png" alt="">
+															        <?php } ?>
+
+															        <input type="hidden" class="delPhoto_<?=$row['photos']?>2" name="delPhoto_<?=$row['photos']?>2" value="true">
+
+															        <?php if ($photo_col['three'] !== '' && $photo_col['three'] !== NULL) { ?>
+															        <!-- Удалить фото 3 -->
+															        <button type="button" class="w-12 h-12 absolute top-2 right-2 focus:outline-0 photoYes z-10 cursor-pointer" onclick="deletePhoto2(<?=$row['photos']?>2)">
+															            <div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] rotate-45 z-10"></div>
+															            <div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] -rotate-45"></div>
+															        </button>
+															        <?php } ?>
+															    	</div>
+
 
 																<script>
 																	function deletePhoto3(photoId) {
 																		var photoId_ = document.getElementById('img_' + photoId);
-																		photoId_.src = '';
+																		photoId_.src = './img/Screenshot_24.png';
 																		document.querySelector('.delPhoto_' + photoId).value = 'false';
 																	}
 
@@ -423,30 +472,44 @@
 																</script>
 
 															<!-- Фото №4 -->
-																<div class="w-[19%] bg-[#D9D9D9] relative">
+																<div class="photoOut w-[19%] bg-[#D9D9D9] relative">
+																	<?php if ($photo_col['four'] !== '' && $photo_col['four'] !== NULL) { ?>
+																		<div class="photoYes absolute top-0 left-0 w-full h-full bg-[rgba(0,0,0,.5)] z-10 cursor-pointer"></div>
+																	<?php } ?>
 																	<label for="photo_<?=$row['photos']?>3" class="w-full h-full absolute top-0 left-0 avatarOut">
 
-																		<div class="w-full h-full absolute top-0">
-																			<img id="img_<?=$row['photos']?>3" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] opacity-25" src="<?=$photo_col['four']?>" alt="">
-																		</div>
+																		<div class="w-full h-full absolute top-0 left-0">
+																		<?php if ($photo_col['four'] !== '' && $photo_col['four'] !== NULL) { ?>
+																			<img id="img_<?=$row['photos']?>3" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['four']?>" alt="">
+																		<?php } elseif ($photo_col['four'] == '' || $photo_col['four'] == NULL) { ?>
+																			<img id="img_<?=$row['photos']?>3" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="./img/Mask_group.png" alt="">
+																		<?php } ?>
+																	</div>
 
+																	<?php if ($photo_col['four'] == '' || $photo_col['four'] == NULL) { ?>
 																		<img class="absolute z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] photoIn" src="./img/free-icon-plus-3398952.png" alt="">
 																	</label>
-																	<input id="photo_<?=$row['photos']?>3" class="invisible" type="file" accept="image/*" name="photo4"> 
+																	<input id="photo_<?=$row['photos']?>3" class="invisible" type="file" accept="image/*" name="photo4">
+
+																	<?php } elseif ($photo_col['four'] !== '' && $photo_col['four'] !== NULL) { ?>
+																		<img class="absolute z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] photoYes pointer-events-none" src="./img/Mask_group.png" alt="">
+																	<?php } ?>
 
 																	<input type="hidden" class="delPhoto_<?=$row['photos']?>3" name="delPhoto_<?=$row['photos']?>3" value="true">
 
+																	<?php if ($photo_col['four'] !== '' && $photo_col['four'] !== NULL) { ?>
 																	<!-- Удалить фото 4 -->
-																	<button type="button" class="w-12 h-12 absolute top-2 right-2 focus:outline-0" onclick="deletePhoto2(<?=$row['photos']?>3)">
+																	<button type="button" class="w-12 h-12 absolute top-2 right-2 focus:outline-0 photoYes z-10 cursor-pointer" onclick="deletePhoto2(<?=$row['photos']?>3)">
 																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] rotate-45 z-10"></div>
 																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] -rotate-45"></div>
 																	</button>
+																	<?php } ?>
 																</div>
 
 																<script>
 																	function deletePhoto4(photoId) {
 																		var photoId_ = document.getElementById('img_' + photoId);
-																		photoId_.src = '';
+																		photoId_.src = './img/Screenshot_24.png';
 																		document.querySelector('.delPhoto_' + photoId).value = 'false';
 																	}
 
@@ -466,30 +529,44 @@
 																</script>
 
 															<!-- Фото №5 -->
-																<div class="w-[19%] bg-[#D9D9D9] relative">
+																<div class="photoOut w-[19%] bg-[#D9D9D9] relative">
+																	<?php if ($photo_col['five'] !== '' && $photo_col['five'] !== NULL) { ?>
+																		<div class="photoYes absolute top-0 left-0 w-full h-full bg-[rgba(0,0,0,.5)] z-10 cursor-pointer"></div>
+																	<?php } ?>
 																	<label for="photo_<?=$row['photos']?>4" class="w-full h-full absolute top-0 left-0 avatarOut">
 
-																		<div class="w-full h-full absolute top-0 left-0">
-																			<img id="img_<?=$row['photos']?>4" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] opacity-25" src="<?=$photo_col['five']?>" alt="">
-																		</div>
+																	<div class="w-full h-full absolute top-0 left-0">
+																	<?php if ($photo_col['five'] !== '' && $photo_col['five'] !== NULL) { ?>
+																		<img id="img_<?=$row['photos']?>4" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['five']?>" alt="">
+																	<?php } elseif ($photo_col['five'] == '' || $photo_col['five'] == NULL) { ?>
+																		<img id="img_<?=$row['photos']?>4" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="./img/Mask_group.png" alt="">
+																	<?php } ?>
+																	</div>
 
+																	<?php if ($photo_col['five'] == '' || $photo_col['five'] == NULL) { ?>
 																		<img class="absolute z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] photoIn" src="./img/free-icon-plus-3398952.png" alt="">
 																	</label>
 																	<input id="photo_<?=$row['photos']?>4" class="invisible" type="file" accept="image/*" name="photo5"> 
 
+																	<?php } elseif ($photo_col['five'] !== '' && $photo_col['five'] !== NULL) { ?>
+																		<img class="absolute z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] photoYes pointer-events-none" src="./img/Mask_group.png" alt="">
+																	<?php } ?>
+
 																	<input type="hidden" class="delPhoto_<?=$row['photos']?>4" name="delPhoto_<?=$row['photos']?>4" value="true">
 
-																	<!-- Удалить фото 4 -->
-																	<button type="button" class="w-12 h-12 absolute top-2 right-2 focus:outline-0" onclick="deletePhoto2(<?=$row['photos']?>4)">
+																	<?php if ($photo_col['five'] !== '' && $photo_col['five'] !== NULL) { ?>
+																	<!-- Удалить фото 5 -->
+																	<button type="button" class="w-12 h-12 absolute top-2 right-2 focus:outline-0 photoYes z-10 cursor-pointer" onclick="deletePhoto2(<?=$row['photos']?>4)">
 																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] rotate-45 z-10"></div>
 																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] -rotate-45"></div>
 																	</button>
+																	<?php } ?>
 																</div>
 
 																<script>
 																	function deletePhoto5(photoId) {
 																		var photoId_ = document.getElementById('img_' + photoId);
-																		photoId_.src = '';
+																		photoId_.src = './img/Screenshot_24.png';
 																		document.querySelector('.delPhoto_' + photoId).value = 'false';
 																	}
 
@@ -511,30 +588,44 @@
 
 														<div class="flex justify-between w-full h-full mb-10">
 															<!-- Фото №6 -->
-																 <div class="w-[19%] bg-[#D9D9D9] relative">
+																 <div class="photoOut w-[19%] bg-[#D9D9D9] relative">
+																 	<?php if ($photo_col['six'] !== '' && $photo_col['six'] !== NULL) { ?>
+																		<div class="photoYes absolute top-0 left-0 w-full h-full bg-[rgba(0,0,0,.5)] z-10 cursor-pointer"></div>
+																	<?php } ?>
 																	<label for="photo_<?=$row['photos']?>5" class="w-full h-full absolute top-0 left-0 avatarOut">
 
-																		<div class="w-full h-full absolute top-0 left-0">
-																			<img id="img_<?=$row['photos']?>5" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] opacity-25" src="<?=$photo_col['six']?>" alt="">
-																		</div>
+																	<div class="w-full h-full absolute top-0 left-0">
+																		<?php if ($photo_col['six'] !== '' && $photo_col['six'] !== NULL) { ?>
+																			<img id="img_<?=$row['photos']?>5" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['six']?>" alt="">
+																		<?php } elseif ($photo_col['six'] == '' || $photo_col['six'] == NULL) { ?>
+																			<img id="img_<?=$row['photos']?>5" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="./img/Mask_group.png" alt="">
+																		<?php } ?>
+																	</div>
 
+																	<?php if ($photo_col['six'] == '' || $photo_col['six'] == NULL) { ?>
 																		<img class="absolute z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] photoIn" src="./img/free-icon-plus-3398952.png" alt="">
 																	</label>
 																	<input id="photo_<?=$row['photos']?>5" class="invisible" type="file" accept="image/*" name="photo6"> 
 
+																	<?php } elseif ($photo_col['six'] !== '' && $photo_col['six'] !== NULL) { ?>
+																		<img class="absolute z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] photoYes pointer-events-none" src="./img/Mask_group.png" alt="">
+																	<?php } ?>
+
 																	<input type="hidden" class="delPhoto_<?=$row['photos']?>5" name="delPhoto_<?=$row['photos']?>5" value="true">
 
-																	<!-- Удалить фото 5 -->
-																	<button type="button" class="w-12 h-12 absolute top-2 right-2 focus:outline-0" onclick="deletePhoto2(<?=$row['photos']?>5)">
+																	<?php if ($photo_col['six'] !== '' && $photo_col['six'] !== NULL) { ?>
+																	<!-- Удалить фото 6 -->
+																	<button type="button" class="w-12 h-12 absolute top-2 right-2 focus:outline-0 photoYes z-10 cursor-pointer" onclick="deletePhoto2(<?=$row['photos']?>5)">
 																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] rotate-45 z-10"></div>
 																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] -rotate-45"></div>
 																	</button>
+																	<?php } ?>
 																</div>
 
 																<script>
 																	function deletePhoto6(photoId) {
 																		var photoId_ = document.getElementById('img_' + photoId);
-																		photoId_.src = '';
+																		photoId_.src = './img/Screenshot_24.png';
 																		document.querySelector('.delPhoto_' + photoId).value = 'false';
 																	}
 
@@ -554,30 +645,44 @@
 																</script>
 
 															<!-- Фото №7 -->
-																<div class="w-[19%] bg-[#D9D9D9] relative">
+																<div class="photoOut w-[19%] bg-[#D9D9D9] relative">
+																	<?php if ($photo_col['seven'] !== '' && $photo_col['seven'] !== NULL) { ?>
+																		<div class="photoYes absolute top-0 left-0 w-full h-full bg-[rgba(0,0,0,.5)] z-10 cursor-pointer"></div>
+																	<?php } ?>
 																	<label for="photo_<?=$row['photos']?>6" class="w-full h-full absolute top-0 left-0 avatarOut">
 
-																		<div class="w-full h-full absolute top-0 left-0">
-																			<img id="img_<?=$row['photos']?>6" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] opacity-25" src="<?=$photo_col['seven']?>" alt="">
-																		</div>
+																	<div class="w-full h-full absolute top-0 left-0">
+																		<?php if ($photo_col['seven'] !== '' && $photo_col['seven'] !== NULL) { ?>
+																			<img id="img_<?=$row['photos']?>6" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['seven']?>" alt="">
+																		<?php } elseif ($photo_col['seven'] == '' || $photo_col['seven'] == NULL) { ?>
+																			<img id="img_<?=$row['photos']?>6" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="./img/Mask_group.png" alt="">
+																		<?php } ?>
+																	</div>
 
+																	<?php if ($photo_col['seven'] == '' || $photo_col['seven'] == NULL) { ?>
 																		<img class="absolute z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] photoIn" src="./img/free-icon-plus-3398952.png" alt="">
 																	</label>
 																	<input id="photo_<?=$row['photos']?>6" class="invisible" type="file" accept="image/*" name="photo7"> 
 
+																	<?php } elseif ($photo_col['seven'] !== '' && $photo_col['seven'] !== NULL) { ?>
+																		<img class="absolute z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] photoYes pointer-events-none" src="./img/Mask_group.png" alt="">
+																	<?php } ?>
+
 																	<input type="hidden" class="delPhoto_<?=$row['photos']?>6" name="delPhoto_<?=$row['photos']?>6" value="true">
 
+																	<?php if ($photo_col['seven'] !== '' && $photo_col['seven'] !== NULL) { ?>
 																	<!-- Удалить фото 7 -->
-																	<button type="button" class="w-12 h-12 absolute top-2 right-2 focus:outline-0" onclick="deletePhoto2(<?=$row['photos']?>6)">
+																	<button type="button" class="w-12 h-12 absolute top-2 right-2 focus:outline-0 photoYes z-10 cursor-pointer" onclick="deletePhoto2(<?=$row['photos']?>6)">
 																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] rotate-45 z-10"></div>
 																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] -rotate-45"></div>
 																	</button>
+																	<?php } ?>
 																</div>
 
 																<script>
 																	function deletePhoto7(photoId) {
 																		var photoId_ = document.getElementById('img_' + photoId);
-																		photoId_.src = '';
+																		photoId_.src = './img/Screenshot_24.png';
 																		document.querySelector('.delPhoto_' + photoId).value = 'false';
 																	}
 
@@ -597,30 +702,44 @@
 																</script>
 
 															<!-- Фото №8 -->
-																<div class="w-[19%] bg-[#D9D9D9] relative">
+																<div class="photoOut w-[19%] bg-[#D9D9D9] relative">
+																	<?php if ($photo_col['eight'] !== '' && $photo_col['eight'] !== NULL) { ?>
+																		<div class="photoYes absolute top-0 left-0 w-full h-full bg-[rgba(0,0,0,.5)] z-10 cursor-pointer"></div>
+																	<?php } ?>
 																	<label for="photo_<?=$row['photos']?>7" class="w-full h-full absolute top-0 left-0 avatarOut">
 
-																		<div class="w-full h-full absolute top-0 left-0">
-																			<img id="img_<?=$row['photos']?>7" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] opacity-25" src="<?=$photo_col['eight']?>" alt="">
-																		</div>
+																	<div class="w-full h-full absolute top-0 left-0">
+																	<?php if ($photo_col['eight'] !== '' && $photo_col['eight'] !== NULL) { ?>
+																		<img id="img_<?=$row['photos']?>7" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['eight']?>" alt="">
+																	<?php } elseif ($photo_col['eight'] == '' || $photo_col['eight'] == NULL) { ?>
+																		<img id="img_<?=$row['photos']?>7" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="./img/Mask_group.png" alt="">
+																	<?php } ?>
+																	</div>
 
+																	<?php if ($photo_col['eight'] == '' || $photo_col['eight'] == NULL) { ?>
 																		<img class="absolute z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] photoIn" src="./img/free-icon-plus-3398952.png" alt="">
 																	</label>
 																	<input id="photo_<?=$row['photos']?>7" class="invisible" type="file" accept="image/*" name="photo8"> 
 
+																	<?php } elseif ($photo_col['eight'] !== '' && $photo_col['eight'] !== NULL) { ?>
+																		<img class="absolute z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] photoYes pointer-events-none" src="./img/Mask_group.png" alt="">
+																	<?php } ?>
+
 																	<input type="hidden" class="delPhoto_<?=$row['photos']?>7" name="delPhoto_<?=$row['photos']?>7" value="true">
 
+																	<?php if ($photo_col['eight'] !== '' && $photo_col['eight'] !== NULL) { ?>
 																	<!-- Удалить фото 8 -->
-																	<button type="button" class="w-12 h-12 absolute top-2 right-2 focus:outline-0" onclick="deletePhoto2(<?=$row['photos']?>7)">
+																	<button type="button" class="w-12 h-12 absolute top-2 right-2 focus:outline-0 photoYes z-10 cursor-pointer" onclick="deletePhoto2(<?=$row['photos']?>7)">
 																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] rotate-45 z-10"></div>
 																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] -rotate-45"></div>
 																	</button>
+																	<?php } ?>
 																</div>
 
 																<script>
 																	function deletePhoto8(photoId) {
 																		var photoId_ = document.getElementById('img_' + photoId);
-																		photoId_.src = '';
+																		photoId_.src = './img/Screenshot_24.png';
 																		document.querySelector('.delPhoto_' + photoId).value = 'false';
 																	}
 
@@ -640,30 +759,44 @@
 																</script>
 
 															<!-- Фото №9 -->
-																<div class="w-[19%] bg-[#D9D9D9] relative">
+																<div class="photoOut w-[19%] bg-[#D9D9D9] relative">
+																	<?php if ($photo_col['nine'] !== '' && $photo_col['nine'] !== NULL) { ?>
+																		<div class="photoYes absolute top-0 left-0 w-full h-full bg-[rgba(0,0,0,.5)] z-10 cursor-pointer"></div>
+																	<?php } ?>
 																	<label for="photo_<?=$row['photos']?>8" class="w-full h-full absolute top-0 left-0 avatarOut">
 
-																		<div class="w-full h-full absolute top-0 left-0">
-																			<img id="img_<?=$row['photos']?>8" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] opacity-25" src="<?=$photo_col['nine']?>" alt="">
-																		</div>
+																	<div class="w-full h-full absolute top-0 left-0">
+																		<?php if ($photo_col['nine'] !== '' && $photo_col['nine'] !== NULL) { ?>
+																			<img id="img_<?=$row['photos']?>8" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['nine']?>" alt="">
+																		<?php } elseif ($photo_col['nine'] == '' || $photo_col['nine'] == NULL) { ?>
+																			<img id="img_<?=$row['photos']?>8" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="./img/Mask_group.png" alt="">
+																		<?php } ?>
+																	</div>
 
+																	<?php if ($photo_col['nine'] == '' || $photo_col['nine'] == NULL) { ?>
 																		<img class="absolute z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] photoIn" src="./img/free-icon-plus-3398952.png" alt="">
 																	</label>
 																	<input id="photo_<?=$row['photos']?>8" class="invisible" type="file" accept="image/*" name="photo9"> 
 
+																	<?php } elseif ($photo_col['nine'] !== '' && $photo_col['nine'] !== NULL) { ?>
+																		<img class="absolute z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] photoYes pointer-events-none" src="./img/Mask_group.png" alt="">
+																	<?php } ?>
+
 																	<input type="hidden" class="delPhoto_<?=$row['photos']?>8" name="delPhoto_<?=$row['photos']?>8" value="true">
 
+																	<?php if ($photo_col['nine'] !== '' && $photo_col['nine'] !== NULL) { ?>
 																	<!-- Удалить фото 9 -->
-																	<button type="button" class="w-12 h-12 absolute top-2 right-2 focus:outline-0" onclick="deletePhoto2(<?=$row['photos']?>8)">
+																	<button type="button" class="w-12 h-12 absolute top-2 right-2 focus:outline-0 photoYes z-10 cursor-pointer" onclick="deletePhoto2(<?=$row['photos']?>8)">
 																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] rotate-45 z-10"></div>
 																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] -rotate-45"></div>
 																	</button>
+																	<?php } ?>
 																</div>
 
 																<script>
 																	function deletePhoto9(photoId) {
 																		var photoId_ = document.getElementById('img_' + photoId);
-																		photoId_.src = '';
+																		photoId_.src = './img/Screenshot_24.png';
 																		document.querySelector('.delPhoto_' + photoId).value = 'false';
 																	}
 
@@ -683,30 +816,44 @@
 																</script>
 
 															<!-- Фото №10 -->
-																<div class="w-[19%] bg-[#D9D9D9] relative">
+																<div class="photoOut w-[19%] bg-[#D9D9D9] relative">
+																	<?php if ($photo_col['ten'] !== '' && $photo_col['ten'] !== NULL) { ?>
+																		<div class="photoYes absolute top-0 left-0 w-full h-full bg-[rgba(0,0,0,.5)] z-10 cursor-pointer"></div>
+																	<?php } ?>
 																	<label for="photo_<?=$row['photos']?>9" class="w-full h-full absolute top-0 left-0 avatarOut">
 
-																		<div class="w-full h-full absolute top-0 left-0">
-																			<img id="img_<?=$row['photos']?>9" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] opacity-25" src="<?=$photo_col['ten']?>" alt="">
-																		</div>
+																	<div class="w-full h-full absolute top-0 left-0">
+																	<?php if ($photo_col['ten'] !== '' && $photo_col['ten'] !== NULL) { ?>
+																		<img id="img_<?=$row['photos']?>9" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['ten']?>" alt="">
+																	<?php } elseif ($photo_col['ten'] == '' || $photo_col['ten'] == NULL) { ?>
+																		<img id="img_<?=$row['photos']?>9" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="./img/Mask_group.png" alt="">
+																	<?php } ?>
+																</div>
 
+																	<?php if ($photo_col['ten'] == '' || $photo_col['ten'] == NULL) { ?>
 																		<img class="absolute z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] photoIn" src="./img/free-icon-plus-3398952.png" alt="">
 																	</label>
 																	<input id="photo_<?=$row['photos']?>9" class="invisible" type="file" accept="image/*" name="photo10"> 
 
+																	<?php } elseif ($photo_col['ten'] !== '' && $photo_col['ten'] !== NULL) { ?>
+																		<img class="absolute z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] photoYes pointer-events-none" src="./img/Mask_group.png" alt="">
+																	<?php } ?>
+
 																	<input type="hidden" class="delPhoto_<?=$row['photos']?>9" name="delPhoto_<?=$row['photos']?>9" value="true">
 
+																	<?php if ($photo_col['ten'] !== '' && $photo_col['ten'] !== NULL) { ?>
 																	<!-- Удалить фото 10 -->
-																	<button type="button" class="w-12 h-12 absolute top-2 right-2 focus:outline-0" onclick="deletePhoto2(<?=$row['photos']?>9)">
+																	<button type="button" class="w-12 h-12 absolute top-2 right-2 focus:outline-0 photoYes z-10 cursor-pointer" onclick="deletePhoto2(<?=$row['photos']?>9)">
 																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] rotate-45 z-10"></div>
 																		<div class="absolute w-12 h-1.5 bg-white shadow-[0_0_10px_rgba(255,0,0,1)] -rotate-45"></div>
 																	</button>
+																	<?php } ?>
 																</div>
 
 																<script>
 																	function deletePhoto10(photoId) {
 																		var photoId_ = document.getElementById('img_' + photoId);
-																		photoId_.src = '';
+																		photoId_.src = './img/Screenshot_24.png';
 																		document.querySelector('.delPhoto_' + photoId).value = 'false';
 																	}
 

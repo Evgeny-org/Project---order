@@ -23,14 +23,18 @@
 
 		<!-- @import './HTML/header_profile.php' -->
 
-		<main class="flex-auto px-10 tracking-widest">
+		<main class="flex-auto px-10 tracking-widest mb-[125px]">
 				<div class="max-w-[1920px] mx-auto">
 					<div class="w-[80%] mx-auto flex">
 
 						<div class="flex flex-col justify-between mr-[50px]">
 
 							<div class="w-[400px] h-[500px] bg-[#D9D9D9] mb-[25px] relative">
-								<img class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?= $_SESSION['user']['avatar'] ?>" alt="">
+								<?php if ($_SESSION['user']['avatar'] !== '') { ?>
+									<img class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?= $_SESSION['user']['avatar'] ?>" alt="">
+								<?php } elseif ($_SESSION['user']['avatar'] == '') { ?>
+									<img class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="./img/Mask_group.png" alt="">
+								<?php } ?>
 							</div>
 
 							<a href="./profile_change.php" class="block w-[400px] h-[55px] normal-case relative">

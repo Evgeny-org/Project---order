@@ -31,6 +31,7 @@
 			</div>
 		</header>
 		<main class="flex-auto px-10 tracking-widest">
+			<span id="big-photo"></span>
 			<div class="max-w-[1920px] mx-auto">
 					<div class="w-[80%] mx-auto flex flex-col">
 
@@ -103,21 +104,24 @@
 														// print_r($photo_col);
 													?>
 
-													<button onclick="showDialog_<?=$row['photos']?>()" class="mr-10 flex">
+													<button onclick="showDialog_<?=$row['photos']?>()" class="previewUp mr-10 flex relative">
 														<div class="w-10 h-10 bg-[#e5e7eb] mr-4 relative">
-															<img class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['one']?>" alt="">
+															<img class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['one']?>" alt="" onerror="this.style.visibility = 'hidden'">
 														</div>
 														<div class="w-10 h-10 bg-[#e5e7eb] mr-4 relative">
-															<img class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['two']?>" alt="">
+															<img class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['two']?>" alt="" onerror="this.style.visibility = 'hidden'">
 														</div>
 														<div class="w-10 h-10 bg-[#e5e7eb] mr-4 relative">
-															<img class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['three']?>" alt="">
+															<img class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['three']?>" alt="" onerror="this.style.visibility = 'hidden'">
 														</div>
 														<div class="w-10 h-10 bg-[#e5e7eb] mr-4 relative">
-															<img class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['four']?>" alt="">
+															<img class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['four']?>" alt="" onerror="this.style.visibility = 'hidden'">
 														</div>
 														<div class="w-10 h-10 bg-[#e5e7eb] relative">
-															<img class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['five']?>" alt="">
+															<img class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['five']?>" alt="" onerror="this.style.visibility = 'hidden'">
+														</div>
+														<div class="previewDown absolute top-0 left-0 w-full h-full bg-[rgba(0,0,0,.5)] flex justify-center items-center">
+															<p class="text-white tracking-widest opacity-100 text-2xl">Посмотреть фото</p>
 														</div>
 													</button>
 
@@ -139,14 +143,28 @@
 
 																	<div class="flex justify-between w-full h-full mb-5">
 																		<!-- Фото №1 -->
-																			<div class="w-[19%] bg-[#D9D9D9] relative">
+																			<div class="photoOut w-[19%] bg-[#D9D9D9] relative">
+
+																				<?php if ($photo_col['one'] !== '' && $photo_col['one'] !== NULL) { ?>
+																					<div onclick="open_photo('<?=$photo_col['one']?>')" class="photoYes absolute top-0 left-0 w-full h-full bg-[rgba(0,0,0,.5)] z-10 cursor-pointer"></div>
+																				<?php } ?>
+
 																				<label for="photo_<?=$row['photos']?>" class="w-full h-full absolute top-0 left-0 avatarOut">
 																					<div class="w-full h-full absolute top-0 left-0">
-																						<img id="img_<?=$row['photos']?>" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['one']?>" alt="">
+																						<?php if ($photo_col['one'] !== '' && $photo_col['one'] !== NULL) { ?>
+																							<img id="img_<?=$row['photos']?>" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['one']?>" alt="">
+																						<?php } elseif ($photo_col['one'] == '' || $photo_col['one'] == NULL) { ?>
+																							<img id="img_<?=$row['photos']?>" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="./img/Mask_group.png" alt="">
+																						<?php } ?>
 																					</div>
 																				</label>
 																				<input id="photo_<?=$row['photos']?>" class="invisible">
+																				<?php if ($photo_col['one'] !== '' && $photo_col['one'] !== NULL) { ?>
+																					<img class="absolute z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] photoYes pointer-events-none" src="./img/Mask_group.png" alt="">
+																				<?php } ?>
 																			</div>
+
+																			
 
 																			<script>
 																				// даёт src фото, то есть путь к файлу, который выбрается в окне выбора изображения
@@ -165,13 +183,23 @@
 																			</script>
 
 																		<!-- Фото №2 -->
-																			<div class="w-[19%] bg-[#D9D9D9] relative">
+																			<div class="photoOut w-[19%] bg-[#D9D9D9] relative">
+																				<?php if ($photo_col['two'] !== '' && $photo_col['two'] !== NULL) { ?>
+																					<div onclick="open_photo('<?=$photo_col['two']?>')" class="photoYes absolute top-0 left-0 w-full h-full bg-[rgba(0,0,0,.5)] z-10 cursor-pointer"></div>
+																				<?php } ?>
 																				<label for="photo_<?=$row['photos']?>1" class="w-full h-full absolute top-0 left-0 avatarOut">
 																					<div class="w-full h-full absolute top-0 left-0">
-																						<img id="img_<?=$row['photos']?>1" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['two']?>" alt="">
+																						<?php if ($photo_col['two'] !== '' && $photo_col['two'] !== NULL) { ?>
+																							<img id="img_<?=$row['photos']?>1" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['two']?>" alt="">
+																						<?php } elseif ($photo_col['two'] == '' || $photo_col['two'] == NULL) { ?>
+																							<img id="img_<?=$row['photos']?>1" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="./img/Mask_group.png" alt="">
+																						<?php } ?>
 																					</div>
 																				</label>
-																				<input id="photo_<?=$row['photos']?>1" class="invisible"> 
+																				<input id="photo_<?=$row['photos']?>1" class="invisible">
+																				<?php if ($photo_col['two'] !== '' && $photo_col['two'] !== NULL) { ?>
+																					<img class="absolute z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] photoYes pointer-events-none" src="./img/Mask_group.png" alt="">
+																				<?php } ?>
 																			</div>
 
 																			<script>
@@ -189,13 +217,23 @@
 																			</script>
 
 																		<!-- Фото №3 -->
-																			<div class="w-[19%] bg-[#D9D9D9] relative">
+																			<div class="photoOut w-[19%] bg-[#D9D9D9] relative">
+																				<?php if ($photo_col['three'] !== '' && $photo_col['three'] !== NULL) { ?>
+																					<div onclick="open_photo('<?=$photo_col['three']?>')" class="photoYes absolute top-0 left-0 w-full h-full bg-[rgba(0,0,0,.5)] z-10 cursor-pointer"></div>
+																				<?php } ?>
 																				<label for="photo_<?=$row['photos']?>2" class="w-full h-full absolute top-0 left-0 avatarOut">
 																					<div class="w-full h-full absolute top-0 left-0">
-																						<img id="img_<?=$row['photos']?>2" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['three']?>" alt="">
+																						<?php if ($photo_col['three'] !== '' && $photo_col['three'] !== NULL) { ?>
+																							<img id="img_<?=$row['photos']?>2" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['three']?>" alt="">
+																						<?php } elseif ($photo_col['three'] == '' || $photo_col['three'] == NULL) { ?>
+																							<img id="img_<?=$row['photos']?>2" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="./img/Mask_group.png" alt="">
+																						<?php } ?>
 																					</div>
 																				</label>
 																				<input id="photo_<?=$row['photos']?>2" class="invisible"> 
+																				<?php if ($photo_col['three'] !== '' && $photo_col['three'] !== NULL) { ?>
+																					<img class="absolute z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] photoYes pointer-events-none" src="./img/Mask_group.png" alt="">
+																				<?php } ?>
 																			</div>
 
 																			<script>
@@ -213,13 +251,23 @@
 																			</script>
 
 																		<!-- Фото №4 -->
-																			<div class="w-[19%] bg-[#D9D9D9] relative">
+																			<div class="photoOut w-[19%] bg-[#D9D9D9] relative">
+																				<?php if ($photo_col['four'] !== '' && $photo_col['four'] !== NULL) { ?>
+																					<div onclick="open_photo('<?=$photo_col['two']?>')" class="photoYes absolute top-0 left-0 w-full h-full bg-[rgba(0,0,0,.5)] z-10 cursor-pointer"></div>
+																				<?php } ?>
 																				<label for="photo_<?=$row['photos']?>3" class="w-full h-full absolute top-0 left-0 avatarOut">
 																					<div class="w-full h-full absolute top-0">
-																						<img id="img_<?=$row['photos']?>3" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['four']?>" alt="">
+																						<?php if ($photo_col['four'] !== '' && $photo_col['four'] !== NULL) { ?>
+																							<img id="img_<?=$row['photos']?>3" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['four']?>" alt="">
+																						<?php } elseif ($photo_col['four'] == '' || $photo_col['four'] == NULL) { ?>
+																							<img id="img_<?=$row['photos']?>3" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="./img/Mask_group.png" alt="">
+																						<?php } ?>
 																					</div>
 																				</label>
 																				<input id="photo_<?=$row['photos']?>3" class="invisible"> 
+																				<?php if ($photo_col['four'] !== '' && $photo_col['four'] !== NULL) { ?>
+																					<img class="absolute z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] photoYes pointer-events-none" src="./img/Mask_group.png" alt="">
+																				<?php } ?>
 																			</div>
 
 																			<script>
@@ -237,13 +285,23 @@
 																			</script>
 
 																		<!-- Фото №5 -->
-																			<div class="w-[19%] bg-[#D9D9D9] relative">
+																			<div class="photoOut w-[19%] bg-[#D9D9D9] relative">
+																				<?php if ($photo_col['five'] !== '' && $photo_col['five'] !== NULL) { ?>
+																					<div onclick="open_photo('<?=$photo_col['five']?>')" class="photoYes absolute top-0 left-0 w-full h-full bg-[rgba(0,0,0,.5)] z-10 cursor-pointer"></div>
+																				<?php } ?>
 																				<label for="photo_<?=$row['photos']?>4" class="w-full h-full absolute top-0 left-0 avatarOut">
 																					<div class="w-full h-full absolute top-0 left-0">
-																						<img id="img_<?=$row['photos']?>4" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['five']?>" alt="">
+																						<?php if ($photo_col['five'] !== '' && $photo_col['five'] !== NULL) { ?>
+																							<img id="img_<?=$row['photos']?>4" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['five']?>" alt="">
+																						<?php } elseif ($photo_col['five'] == '' || $photo_col['five'] == NULL) { ?>
+																							<img id="img_<?=$row['photos']?>4" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="./img/Mask_group.png" alt="">
+																						<?php } ?>
 																					</div>
 																				</label>
 																				<input id="photo_<?=$row['photos']?>4" class="invisible"> 
+																				<?php if ($photo_col['five'] !== '' && $photo_col['five'] !== NULL) { ?>
+																					<img class="absolute z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] photoYes pointer-events-none" src="./img/Mask_group.png" alt="">
+																				<?php } ?>
 																			</div>
 
 																			<script>
@@ -263,13 +321,23 @@
 
 																	<div class="flex justify-between w-full h-full">
 																		<!-- Фото №6 -->
-																			 <div class="w-[19%] bg-[#D9D9D9] relative">
+																			 <div class="photoOut w-[19%] bg-[#D9D9D9] relative">
+																			 	<?php if ($photo_col['six'] !== '' && $photo_col['six'] !== NULL) { ?>
+																					<div onclick="open_photo('<?=$photo_col['six']?>')" class="photoYes absolute top-0 left-0 w-full h-full bg-[rgba(0,0,0,.5)] z-10 cursor-pointer"></div>
+																				<?php } ?>
 																				<label for="photo_<?=$row['photos']?>5" class="w-full h-full absolute top-0 left-0 avatarOut">
 																					<div class="w-full h-full absolute top-0 left-0">
-																						<img id="img_<?=$row['photos']?>5" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['six']?>" alt="">
+																						<?php if ($photo_col['six'] !== '' && $photo_col['six'] !== NULL) { ?>
+																							<img id="img_<?=$row['photos']?>5" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['six']?>" alt="">
+																						<?php } elseif ($photo_col['six'] == '' || $photo_col['six'] == NULL) { ?>
+																							<img id="img_<?=$row['photos']?>5" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="./img/Mask_group.png" alt="">
+																						<?php } ?>
 																					</div>
 																				</label>
 																				<input id="photo_<?=$row['photos']?>5" class="invisible"> 
+																				<?php if ($photo_col['six'] !== '' && $photo_col['six'] !== NULL) { ?>
+																					<img class="absolute z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] photoYes pointer-events-none" src="./img/Mask_group.png" alt="">
+																				<?php } ?>
 																			</div>
 
 																			<script>
@@ -287,13 +355,23 @@
 																			</script>
 
 																		<!-- Фото №7 -->
-																			<div class="w-[19%] bg-[#D9D9D9] relative">
+																			<div class="photoOut w-[19%] bg-[#D9D9D9] relative">
+																				<?php if ($photo_col['seven'] !== '' && $photo_col['seven'] !== NULL) { ?>
+																					<div onclick="open_photo('<?=$photo_col['seven']?>')" class="photoYes absolute top-0 left-0 w-full h-full bg-[rgba(0,0,0,.5)] z-10 cursor-pointer"></div>
+																				<?php } ?>
 																				<label for="photo_<?=$row['photos']?>6" class="w-full h-full absolute top-0 left-0 avatarOut">
 																					<div class="w-full h-full absolute top-0 left-0">
-																						<img id="img_<?=$row['photos']?>6" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['seven']?>" alt="">
+																						<?php if ($photo_col['seven'] !== '' && $photo_col['seven'] !== NULL) { ?>
+																							<img id="img_<?=$row['photos']?>6" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['seven']?>" alt="">
+																						<?php } elseif ($photo_col['seven'] == '' || $photo_col['seven'] == NULL) { ?>
+																							<img id="img_<?=$row['photos']?>6" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="./img/Mask_group.png" alt="">
+																						<?php } ?>
 																					</div>
 																				</label>
 																				<input id="photo_<?=$row['photos']?>6" class="invisible"> 
+																				<?php if ($photo_col['seven'] !== '' && $photo_col['seven'] !== NULL) { ?>
+																					<img class="absolute z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] photoYes pointer-events-none" src="./img/Mask_group.png" alt="">
+																				<?php } ?>
 																			</div>
 
 																			<script>
@@ -311,12 +389,22 @@
 																			</script>
 
 																		<!-- Фото №8 -->
-																			<div class="w-[19%] bg-[#D9D9D9] relative">
+																			<div class="photoOut w-[19%] bg-[#D9D9D9] relative">
+																				<?php if ($photo_col['eight'] !== '' && $photo_col['eight'] !== NULL) { ?>
+																					<div onclick="open_photo('<?=$photo_col['eight']?>')" class="photoYes absolute top-0 left-0 w-full h-full bg-[rgba(0,0,0,.5)] z-10 cursor-pointer"></div>
+																				<?php } ?>
 																				<label for="photo_<?=$row['photos']?>7" class="w-full h-full absolute top-0 left-0 avatarOut">
 																					<div class="w-full h-full absolute top-0 left-0">
-																						<img id="img_<?=$row['photos']?>7" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['eight']?>" alt="">
+																						<?php if ($photo_col['eight'] !== '' && $photo_col['eight'] !== NULL) { ?>
+																							<img id="img_<?=$row['photos']?>7" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['eight']?>" alt="">
+																						<?php } elseif ($photo_col['eight'] == '' || $photo_col['eight'] == NULL) { ?>
+																							<img id="img_<?=$row['photos']?>7" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="./img/Mask_group.png" alt="">
+																						<?php } ?>
 																					</div>
 																				</label>
+																				<?php if ($photo_col['eight'] !== '' && $photo_col['eight'] !== NULL) { ?>
+																					<img class="absolute z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] photoYes pointer-events-none" src="./img/Mask_group.png" alt="">
+																				<?php } ?>
 																				<input id="photo_<?=$row['photos']?>7" class="invisible"> 
 																			</div>
 
@@ -335,13 +423,23 @@
 																			</script>
 
 																		<!-- Фото №9 -->
-																			<div class="w-[19%] bg-[#D9D9D9] relative">
+																			<div class="photoOut w-[19%] bg-[#D9D9D9] relative">
+																				<?php if ($photo_col['nine'] !== '' && $photo_col['nine'] !== NULL) { ?>
+																					<div onclick="open_photo('<?=$photo_col['nine']?>')" class="photoYes absolute top-0 left-0 w-full h-full bg-[rgba(0,0,0,.5)] z-10 cursor-pointer"></div>
+																				<?php } ?>
 																				<label for="photo_<?=$row['photos']?>8" class="w-full h-full absolute top-0 left-0 avatarOut">
 																					<div class="w-full h-full absolute top-0 left-0">
-																						<img id="img_<?=$row['photos']?>8" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['nine']?>" alt="">
+																						<?php if ($photo_col['nine'] !== '' && $photo_col['nine'] !== NULL) { ?>
+																							<img id="img_<?=$row['photos']?>8" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['nine']?>" alt="">
+																						<?php } elseif ($photo_col['nine'] == '' || $photo_col['nine'] == NULL) { ?>
+																							<img id="img_<?=$row['photos']?>8" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="./img/Mask_group.png" alt="">
+																						<?php } ?>
 																					</div>
 																				</label>
 																				<input id="photo_<?=$row['photos']?>8" class="invisible"> 
+																				<?php if ($photo_col['nine'] !== '' && $photo_col['nine'] !== NULL) { ?>
+																					<img class="absolute z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] photoYes pointer-events-none" src="./img/Mask_group.png" alt="">
+																				<?php } ?>
 																			</div>
 
 																			<script>
@@ -359,13 +457,23 @@
 																			</script>
 
 																		<!-- Фото №10 -->
-																			<div class="w-[19%] bg-[#D9D9D9] relative">
+																			<div class="photoOut w-[19%] bg-[#D9D9D9] relative">
+																				<?php if ($photo_col['ten'] !== '' && $photo_col['ten'] !== NULL) { ?>
+																					<div onclick="open_photo('<?=$photo_col['ten']?>')" class="photoYes absolute top-0 left-0 w-full h-full bg-[rgba(0,0,0,.5)] z-10 cursor-pointer"></div>
+																				<?php } ?>
 																				<label for="photo_<?=$row['photos']?>9" class="w-full h-full absolute top-0 left-0 avatarOut">
 																					<div class="w-full h-full absolute top-0 left-0">
-																						<img id="img_<?=$row['photos']?>9" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['ten']?>" alt="">
+																						<?php if ($photo_col['ten'] !== '' && $photo_col['ten'] !== NULL) { ?>
+																							<img id="img_<?=$row['photos']?>9" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="<?=$photo_col['ten']?>" alt="">
+																						<?php } elseif ($photo_col['ten'] == '' || $photo_col['ten'] == NULL) { ?>
+																							<img id="img_<?=$row['photos']?>9" class="w-full h-full object-cover absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" src="./img/Mask_group.png" alt="">
+																						<?php } ?>
 																					</div>
 																				</label>
 																				<input id="photo_<?=$row['photos']?>9" class="invisible"> 
+																				<?php if ($photo_col['ten'] !== '' && $photo_col['ten'] !== NULL) { ?>
+																					<img class="absolute z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] photoYes pointer-events-none" src="./img/Mask_group.png" alt="">
+																				<?php } ?>
 																			</div>
 
 																			<script>
@@ -440,6 +548,17 @@
 						        <div class="w-full h-full bg-[#D9D9D9] absolute top-0 left-0 z-[-10]"></div>
 						    </button>
 						</form>
+
+						<script>
+							function open_photo(photo) {
+							  document.getElementById("big-photo").innerHTML =
+							    ("<img onclick='close_photo()' style='position: absolute; height: 80vh; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 11; cursor: pointer;' src='" + photo + "'>");
+							}
+
+							function close_photo() {
+							  document.getElementById("big-photo").innerHTML = "";
+							}
+						</script>
 
 						<!-- Чудо скрипт от юшки, который активирует куки файлы и при достижени лимита - блокирует нажатия :) -->
 							<script>
